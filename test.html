@@ -1,0 +1,78 @@
+<html>
+    <head>
+        <title>Tyler Woodfin</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        <!-- css -->
+        <link rel="stylesheet" href="core.css">
+
+        <!-- fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200;300;400&display=swap" rel="stylesheet">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.20/lodash.min.js"></script>
+        <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+
+        <script>
+            function initialize() {
+                getGithub();
+            }
+
+            function getGithub() {
+                console.log("Empty")
+                $("#projects").hide();
+                $("#projects").empty();
+                $.getJSON( "https://api.github.com/users/tylerjwoodfin/repos", {
+                format: "json"
+                }).done(function( data ) {
+                    console.log("Done")
+                    $(_.reverse(_.sortBy(data, "updated_at"))).each(function(i, item) {
+                        console.log(item);
+                        $("#projects").append(`<a href="${item.html_url}" target=_new>${item.name}</a>\n`);
+                        return i < 6;
+                    })
+                }).fail(function() {
+                    $("#projects").append(`<a href="https://www.github.com/tylerjwoodfin" target=_new>GitHub</a>`);
+                })
+            };
+
+            function toggleGitHub() {
+                console.log("Projects");
+                console.log($("#projects")[0].innerHTML)
+                $("#projects").toggle();
+            }
+
+            var coll = document.getElementsByClassName("collapsible");
+            var i;
+
+            for (i = 0; i < coll.length; i++) {
+                coll[i].addEventListener("click", function() {
+                    this.classList.toggle("active");
+                    var content = this.nextElementSibling;
+
+                    if (content.style.display === "flex") {
+                        content.style.display = "none";
+                    } else {
+                        content.style.display = "flex";
+                    }
+                });
+            }
+        </script>
+    </head>
+    <body onload="initialize()">
+        <div class="div-center">
+            <div class="div-center-title">
+                <h1 class="header">Hi, I'm Tyler Woodfin.</h1>
+            </div>
+            <div class="div-center-links">
+                <button class="collapsible" onclick="toggleGitHub()">Latest Work</button>
+                <div id="projects" class="div-center-links">
+                    <i class="fa fa-circle-notch fa-spin"></i>
+                </div>
+                <a href="https://github.com/tylerjwoodfin" target="_new">GitHub</a>
+                <a href="https://linkedin.com/in/tylerjwoodfin" target="_new">LinkedIn</a>
+            </div>
+        </div>
+    </body>
+</html>

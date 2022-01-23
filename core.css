@@ -1,0 +1,59 @@
+body {
+    font-family: 'Source Sans Pro', sans-serif;
+    color: #d8d8d8;
+    font-size: 30px;
+    background-image: url('tile.png');
+}
+
+.div-center {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);    
+}
+
+.div-center-title, .div-center-links {
+    text-align: left;
+}
+
+.div-center-links {
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    font-weight: 300;
+    padding: 10px;
+    font-size: 80px;
+}
+
+a, button {
+    font-family: 'Source Sans Pro', sans-serif;
+    background: none;
+    border: none;
+    font-size: 38px;
+    text-decoration: none;
+    color: darkorange;
+    cursor: pointer;
+    padding: 0;
+    text-align: left;
+}
+
+a:hover::after, button:hover:after {
+    content: " ->";
+}
+
+.fa-circle-notch {
+    display: block;
+    font-size: 35px;
+    color: darkorange;
+}
+
+#menu-github {
+    display: none;
+}
