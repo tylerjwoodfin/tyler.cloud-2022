@@ -16,48 +16,31 @@
 
         <script>
             function initialize() {
-                getGithub();
+                $("#projects").hide();
+                // getGithub();
             }
 
             function getGithub() {
-                console.log("Empty")
-                $("#projects").hide();
-                $("#projects").empty();
                 $.getJSON( "https://api.github.com/users/tylerjwoodfin/repos", {
                 format: "json"
                 }).done(function( data ) {
-                    console.log("Done")
+                    $("#projects").empty();
                     $(_.reverse(_.sortBy(data, "updated_at"))).each(function(i, item) {
-                        console.log(item);
-                        $("#projects").append(`<a href="${item.html_url}" target=_new>${item.name}</a>\n`);
+                        $("#projects").append(`<a href="${item.html_url}" class="sub" target=_new>${item.name}</a>\n`);
                         return i < 6;
                     })
                 }).fail(function() {
-                    $("#projects").append(`<a href="https://www.github.com/tylerjwoodfin" target=_new>GitHub</a>`);
+                    $("#projects").append(`<a href="https://www.github.com/tylerjwoodfin" class="sub" target=_new>GitHub</a>`);
                 })
             };
 
             function toggleGitHub() {
-                console.log("Projects");
-                console.log($("#projects")[0].innerHTML)
+                if($("#projects")[0].innerHTML.split("<a").length < 2) {
+                    getGithub();
+                }
                 $("#projects").toggle();
             }
 
-            var coll = document.getElementsByClassName("collapsible");
-            var i;
-
-            for (i = 0; i < coll.length; i++) {
-                coll[i].addEventListener("click", function() {
-                    this.classList.toggle("active");
-                    var content = this.nextElementSibling;
-
-                    if (content.style.display === "flex") {
-                        content.style.display = "none";
-                    } else {
-                        content.style.display = "flex";
-                    }
-                });
-            }
         </script>
     </head>
     <body onload="initialize()">
@@ -65,13 +48,15 @@
             <div class="div-center-title">
                 <h1 class="header">Hi, I'm Tyler Woodfin.</h1>
             </div>
-            <div class="div-center-links">
-                <button class="collapsible" onclick="toggleGitHub()">Latest Work</button>
-                <div id="projects" class="div-center-links">
-                    <i class="fa fa-circle-notch fa-spin"></i>
+            <div class="div-center-links-container">
+                <div class="div-center-links bottom-padding">
+                    <button onclick="toggleGitHub()">Latest Work</button>
+                    <div id="projects" class="div-center-links">
+                        <i class="fa fa-circle-notch fa-spin"></i>
+                    </div>
+                    <a href="https://github.com/tylerjwoodfin" target="_new">GitHub</a>
+                    <a href="https://linkedin.com/in/tylerjwoodfin" target="_new">LinkedIn</a>
                 </div>
-                <a href="https://github.com/tylerjwoodfin" target="_new">GitHub</a>
-                <a href="https://linkedin.com/in/tylerjwoodfin" target="_new">LinkedIn</a>
             </div>
         </div>
     </body>

@@ -3,14 +3,17 @@ body {
     color: #d8d8d8;
     font-size: 30px;
     background-image: url('tile.png');
+    overflow-x: hidden;
+}
+
+body,html {
+    overflow-x: hidden;
 }
 
 .div-center {
-    display: flex;
-    flex-direction: column;
     margin: 0;
     position: absolute;
-    top: 50%;
+    top: 30%;
     left: 50%;
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);    
@@ -20,15 +23,20 @@ body {
     text-align: left;
 }
 
+.div-center-links-container {
+    display: flex;
+    margin: auto;
+    position: absolute;
+}
+
 .div-center-links {
-    text-align: left;
     display: flex;
     flex-direction: column;
+    width: fit-content;
 }
 
 .header {
     font-weight: 300;
-    padding: 10px;
     font-size: 80px;
 }
 
@@ -44,16 +52,21 @@ a, button {
     text-align: left;
 }
 
-a:hover::after, button:hover:after {
-    content: " ->";
+a:hover, button:hover, .underline {
+    text-decoration: underline;
+}
+
+.sub {
+    font-size: 32px;
+    padding-left: 32px;
+}
+
+.bottom-padding {
+    margin-bottom: 30%;
 }
 
 .fa-circle-notch {
     display: block;
     font-size: 35px;
     color: darkorange;
-}
-
-#menu-github {
-    display: none;
 }
