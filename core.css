@@ -50,6 +50,7 @@ a, button {
     cursor: pointer;
     padding: 0;
     text-align: left;
+    width: max-content;
 }
 
 a:hover, button:hover, .underline {
