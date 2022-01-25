@@ -14,40 +14,8 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.20/lodash.min.js"></script>
         <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 
-        <script>
-            function initialize() {
-                $("#projects").hide();
-                getGithub();
-            }
-
-            function getGithub() {
-                $.getJSON( "https://api.github.com/users/tylerjwoodfin/repos", {
-                format: "json"
-                }).done(function( data ) {
-                    $("#projects").empty();
-                    $(_.reverse(_.sortBy(data, "updated_at"))).each(function(i, item) {
-                        $("#projects").append(`<a href="${item.html_url}" class="sub" target=_new>${item.name}</a>\n`);
-                        return i < 6;
-                    })
-                }).then(function() {
-                    $("#projects").append(`<a href="https://www.github.com/tylerjwoodfin" class="sub" target=_new>More...</a>`);
-                });
-            };
-
-            function toggleGitHub() {
-                if($("#projects")[0].innerHTML.split("<a").length < 2) {
-                    getGithub();
-                }
-                $("#projects").toggle();
-
-                if($("#projects")[0].style.display !== 'none') {
-                    $("#button-latest")[0].style.textDecoration = "underline";
-                } else {
-                    $("#button-latest")[0].style.textDecoration = "";
-                }
-            }
-
-        </script>
+        <!-- js -->
+        <script src="core.js"></script>
     </head>
     <body onload="initialize()">
         <div class="div-center">
@@ -60,7 +28,10 @@
                     <div id="projects" class="div-center-links">
                         <i class="fa fa-circle-notch fa-spin"></i>
                     </div>
-                    <a href="https://github.com/tylerjwoodfin" target="_new">Reach Out</a>
+                    <button id="button-reachout" onclick="toggleReachOut()">Reach Out</button>
+                    <div id="reachout" class="div-center-links">
+                        <textarea class="textarea-reachout"></textarea>
+                    </div>
                     <a href="https://linkedin.com/in/tylerjwoodfin" target="_new">LinkedIn</a>
                 </div>
             </div>
