@@ -1,15 +1,18 @@
 <html>
     <head>
         <title>Tyler Woodfin</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
         <!-- css -->
-        <link rel="stylesheet" href="core.css">
+        <link rel="stylesheet" href="core.css" />
 
         <!-- fonts -->
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200;300;400&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200;300;400&display=swap"
+            rel="stylesheet"
+        />
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.20/lodash.min.js"></script>
         <script src="https://kit.fontawesome.com/a076d05399.js"></script>
@@ -24,15 +27,34 @@
             </div>
             <div class="div-center-links-container">
                 <div class="div-center-links bottom-padding">
-                    <button id="button-latest" onclick="toggleGitHub()">Latest Work</button>
-                    <div id="projects" class="div-center-links">
+                    <button id="button-latest" onclick="toggleLatest()">
+                        Latest Work<img
+                            id="arrow-latest"
+                            src="level-up-alt-solid.svg"
+                        />
+                    </button>
+                    <div id="latest" class="div-center-links">
                         <i class="fa fa-circle-notch fa-spin"></i>
                     </div>
-                    <button id="button-reachout" onclick="toggleReachOut()">Reach Out</button>
-                    <div id="reachout" class="div-center-links">
+                    <button
+                        id="button-reachout"
+                        onclick="toggleButton('reachout')"
+                    >
+                        Reach Out<img
+                            id="arrow-reachout"
+                            src="level-up-alt-solid.svg"
+                        />
+                    </button>
+                    <div id="reachout" class="div-center-links reachout">
                         <textarea class="textarea-reachout"></textarea>
+                        <a class="textarea-reachout-send" href="">Send</a>
                     </div>
-                    <a href="https://linkedin.com/in/tylerjwoodfin" target="_new">LinkedIn</a>
+                    <a
+                        id="button-linkedin"
+                        href="https://linkedin.com/in/tylerjwoodfin"
+                        target="_new"
+                        >LinkedIn</a
+                    >
                 </div>
             </div>
         </div>

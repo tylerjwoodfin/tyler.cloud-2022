@@ -1,12 +1,13 @@
 body {
-    font-family: 'Source Sans Pro', sans-serif;
+    font-family: "Source Sans Pro", sans-serif;
     color: #d8d8d8;
     font-size: 30px;
-    background-image: url('tile.png');
+    background-image: url("tile.png");
     overflow-x: hidden;
 }
 
-body,html {
+body,
+html {
     overflow-x: hidden;
 }
 
@@ -16,10 +17,11 @@ body,html {
     top: 30%;
     left: 50%;
     -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);    
+    transform: translate(-50%, -50%);
 }
 
-.div-center-title, .div-center-links {
+.div-center-title,
+.div-center-links {
     text-align: left;
 }
 
@@ -40,8 +42,9 @@ body,html {
     font-size: 80px;
 }
 
-a, button {
-    font-family: 'Source Sans Pro', sans-serif;
+a,
+button {
+    font-family: "Source Sans Pro", sans-serif;
     background: none;
     border: none;
     font-size: 38px;
@@ -51,9 +54,12 @@ a, button {
     padding: 0;
     text-align: left;
     width: max-content;
+    transition: 0.4s;
 }
 
-a:hover, button:hover, .underline {
+a:hover,
+button:hover,
+.underline {
     text-decoration: underline;
 }
 
@@ -69,9 +75,14 @@ a:hover, button:hover, .underline {
     color: #d8d8d8;
     resize: none;
     font-size: 32px;
-    font-family: 'Source Sans Pro', sans-serif;
+    font-family: "Source Sans Pro", sans-serif;
     padding: 8px;
     background-color: transparent;
+}
+
+.textarea-reachout-send {
+    text-align: right;
+    font-size: 32px;
 }
 
 textarea:focus {
@@ -85,5 +96,19 @@ textarea:focus {
 .fa-circle-notch {
     display: block;
     font-size: 35px;
+    color: darkorange;
+}
+
+.reachout {
+    text-align: right;
+    display: block;
+    width: 80%;
+}
+
+#arrow-latest,
+#arrow-reachout {
+    display: none;
+    height: 32px;
+    width: 32px;
     color: darkorange;
 }

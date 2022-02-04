@@ -1,42 +1,47 @@
 function initialize() {
-    $("#projects").hide();
+    $("#latest").hide();
     $("#reachout").hide();
-    getGithub();
+    getLatest();
 }
 
-function getGithub() {
-    $.getJSON( "https://api.github.com/users/tylerjwoodfin/repos", {
-    format: "json"
-    }).done(function( data ) {
-        $("#projects").empty();
-        $(_.reverse(_.sortBy(data, "updated_at"))).each(function(i, item) {
-            $("#projects").append(`<a href="${item.html_url}" class="sub" target=_new>${item.name}</a>\n`);
-            return i < 6;
+function getLatest() {
+    $.getJSON("https://api.github.com/users/tylerjwoodfin/repos", {
+        format: "json",
+    })
+        .done(function (data) {
+            $("#latest").empty();
+            $(_.reverse(_.sortBy(data, "pushed_at"))).each(function (i, item) {
+                $("#latest").append(
+                    `<a href="${item.html_url}" class="sub" target=_new>${item.name}</a>\n`
+                );
+                return i < 6;
+            });
         })
-    }).then(function() {
-        $("#projects").append(`<a href="https://www.github.com/tylerjwoodfin" class="sub" target=_new>More...</a>`);
-    });
-};
-
-function toggleGitHub() {
-    if($("#projects")[0].innerHTML.split("<a").length < 2) {
-        getGithub();
-    }
-    $("#projects").toggle();
-
-    if($("#projects")[0].style.display !== 'none') {
-        $("#button-latest")[0].style.textDecoration = "underline";
-    } else {
-        $("#button-latest")[0].style.textDecoration = "";
-    }
+        .then(function () {
+            $("#latest").append(
+                `<a href="https://www.github.com/tylerjwoodfin" class="sub" target=_new>More...</a>`
+            );
+        });
 }
 
-function toggleReachOut() {
-    $("#reachout").toggle();
+function toggleLatest() {
+    if ($("#latest")[0].innerHTML.split("<a").length < 2) {
+        getLatest();
+    }
 
-    if($("#reachout")[0].style.display !== 'none') {
-        $("#button-reachout")[0].style.textDecoration = "underline";
+    toggleButton("latest");
+}
+
+function toggleButton(name) {
+    $(`#${name}`).toggle();
+    if ($(`#${name}`)[0].style.display !== `none`) {
+        $(`#button-${name}`)[0].style.textDecoration = `underline`;
+        $(`[id^=button]`).not(`#button-${name}`).hide();
+        $(`[id^=arrow]`).not(`#arrow-${name}`).hide();
+        $(`[id^=arrow]`).show();
     } else {
-        $("#button-reachout")[0].style.textDecoration = "";
+        $(`#button-${name}`)[0].style.textDecoration = ``;
+        $(`[id^=arrow]`).hide();
+        $(`[id^=button]`).show();
     }
 }
