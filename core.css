@@ -6,11 +6,6 @@ body {
     overflow-x: hidden;
 }
 
-body,
-html {
-    overflow-x: hidden;
-}
-
 .div-center {
     margin: 0;
     position: absolute;
@@ -102,7 +97,6 @@ textarea:focus {
 .reachout {
     text-align: right;
     display: block;
-    width: 80%;
 }
 
 #arrow-latest,

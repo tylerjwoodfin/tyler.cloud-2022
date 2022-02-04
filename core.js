@@ -12,7 +12,10 @@ function getLatest() {
             $("#latest").empty();
             $(_.reverse(_.sortBy(data, "pushed_at"))).each(function (i, item) {
                 $("#latest").append(
-                    `<a href="${item.html_url}" class="sub" target=_new>${item.name}</a>\n`
+                    `<a href="${item.html_url.tr}" class="sub" target=_new>${
+                        item.name.substring(0, 16) +
+                        (item.name.length > 16 ? "..." : "")
+                    }</a>\n`
                 );
                 return i < 6;
             });
