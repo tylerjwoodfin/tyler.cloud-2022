@@ -112,10 +112,31 @@ textarea:focus {
     min-width: 100%;
 }
 
-#arrow-latest,
-#arrow-reachout {
+.arrow,
+.load-spin {
     display: none;
+    text-decoration: none;
     height: 32px;
     width: 32px;
     color: darkorange;
+}
+
+.load-spin {
+    display: block;
+    animation: rotation 2s infinite linear;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.load-spin-send {
+    float: right;
+}
+
+@keyframes rotation {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(359deg);
+    }
 }

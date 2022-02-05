@@ -1,6 +1,6 @@
 function initialize() {
     $("#latest").hide();
-    $(`.textarea-reachout-send-loading`).hide();
+    $(`.load-spin-send`).hide();
     $("#reachout").hide();
     getLatest();
 }
@@ -51,6 +51,8 @@ function toggleButton(name) {
 }
 
 function handleSend() {
-    $(`.textarea-reachout-send-loading`).show();
+    console.log("Showing");
+    $(`.load-spin-send`).show();
+    console.log("Showed");
     $(`.textarea-reachout-send`).hide();
 }

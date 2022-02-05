@@ -15,7 +15,6 @@
         />
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.20/lodash.min.js"></script>
-        <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 
         <!-- js -->
         <script src="core.js"></script>
@@ -29,12 +28,13 @@
                 <div class="div-center-links bottom-padding">
                     <button id="button-latest" onclick="toggleButton('latest')">
                         Latest Work<img
+                            class="arrow"
                             id="arrow-latest"
                             src="level-up-alt-solid.svg"
                         />
                     </button>
                     <div id="latest" class="div-center-links">
-                        <i class="fa fa-circle-notch fa-spin"></i>
+                        <img class="load-spin" src="circle-notch-solid.svg" />
                     </div>
                     <button
                         id="button-reachout"
@@ -42,6 +42,7 @@
                     >
                         Reach Out<img
                             id="arrow-reachout"
+                            class="arrow"
                             src="level-up-alt-solid.svg"
                         />
                     </button>
@@ -57,9 +58,10 @@
                             >
                                 Send
                             </button>
-                            <i
-                                class="textarea-reachout-send-loading fa fa-circle-notch fa-spin"
-                            ></i>
+                            <img
+                                class="load-spin load-spin-send"
+                                src="circle-notch-solid.svg"
+                            />
                         </div>
                     </div>
                     <a
