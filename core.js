@@ -2,7 +2,7 @@ function initialize() {
     $("#latest").hide();
     $(`.load-spin-send`).hide();
     $("#reachout").hide();
-    getLatest();
+    // getLatest();
 }
 
 function getLatest() {
@@ -32,6 +32,7 @@ function toggleButton(name) {
         getLatest();
     }
     if (name === "reachout") {
+        $(`.textarea-reachout-send`).show();
         $(`.textarea-${name}`)[0].focus();
     }
 
@@ -47,12 +48,29 @@ function toggleButton(name) {
         $(`#button-${name}`)[0].style.textDecoration = ``;
         $(`[id^=arrow]`).hide();
         $(`[id^=button]`).show();
+        $("#reachout-send-results").html("");
     }
 }
 
 function handleSend() {
-    console.log("Showing");
-    $(`.load-spin-send`).show();
-    console.log("Showed");
     $(`.textarea-reachout-send`).hide();
+    $(`.load-spin-send`).show();
+
+    $.get(
+        "feedback/post.php?subject=Website&message=" +
+            $("#textarea-reachout")[0].value,
+        function (data) {
+            $("#reachout-send-results").text(
+                "Thank you! Your message has been sent."
+            );
+        },
+        "text"
+    ).fail(function () {
+        $("#reachout-send-results").html(
+            "Sorry, there was a problem sending your message. Please reach out through <a href='https://linkedin.com/in/tylerjwoodfin' target='_new'>LinkedIn</a>."
+        );
+    });
+
+    $("#textarea-reachout")[0].value = "";
+    $(`.load-spin-send`).hide();
 }
