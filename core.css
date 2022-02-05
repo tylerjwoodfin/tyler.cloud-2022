@@ -132,6 +132,12 @@ textarea:focus {
     float: right;
 }
 
+.reachout-send-results {
+    max-width: fit-content;
+    display: block;
+    text-align: left;
+}
+
 @keyframes rotation {
     from {
         transform: rotate(0deg);
