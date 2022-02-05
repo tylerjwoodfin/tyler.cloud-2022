@@ -57,7 +57,7 @@ function handleSend() {
     $(`.load-spin-send`).show();
 
     $.get(
-        "feedback/post.php?subject=Website&message=" +
+        "/feedback/post.php?subject=Website&message=" +
             $("#textarea-reachout")[0].value,
         function (data) {
             $("#reachout-send-results").text(
