@@ -1,10 +1,24 @@
 <html>
     <head>
         <title>Tyler Woodfin</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-        <!-- css -->
+        <!-- basic housekeeping -->
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta charset="UTF-8" />
+        <meta
+            name="description"
+            content="Tyler Woodfin is a software engineer in Austin, Texas."
+        />
+        <meta name="keywords" content="tyler, woodfin, consultant, austin" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <!-- jquery, lodash -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.20/lodash.min.js"></script>
+
+        <!-- local css/js -->
         <link rel="stylesheet" href="core.css" />
+        <script src="core.js"></script>
 
         <!-- fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -13,69 +27,62 @@
             href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200;300;400&display=swap"
             rel="stylesheet"
         />
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.20/lodash.min.js"></script>
 
-        <!-- js -->
-        <script src="core.js"></script>
+        <!-- favicon -->
+        <link href="../assets/favicon.ico" rel="shortcut icon" />
     </head>
-    <body onload="initialize()">
-        <div class="div-center">
-            <div class="div-center-title">
-                <h1 class="header">Hi, I'm Tyler Woodfin.</h1>
+    <body>
+        <div class="div-center-title">
+            <h1 class="header">Hi, I'm Tyler Woodfin.</h1>
+        </div>
+        <div class="div-links-container div-links bottom-padding">
+            <!-- latest -->
+            <button id="button-latest" onclick="toggleButton('latest')">
+                Latest Work<img
+                    class="arrow"
+                    id="arrow-latest"
+                    src="/assets/arrow.svg"
+                />
+            </button>
+            <div id="latest" class="div-links hidden">
+                <img class="load-spin" src="/assets/loading.svg" />
             </div>
-            <div class="div-center-links-container">
-                <div class="div-center-links bottom-padding">
-                    <button id="button-latest" onclick="toggleButton('latest')">
-                        Latest Work<img
-                            class="arrow"
-                            id="arrow-latest"
-                            src="level-up-alt-solid.svg"
-                        />
+
+            <!-- reach out -->
+            <button id="button-reachout" onclick="toggleButton('reachout')">
+                Reach Out<img
+                    id="arrow-reachout"
+                    class="arrow"
+                    src="/assets/arrow.svg"
+                />
+            </button>
+            <div id="reachout" class="div-links reachout hidden">
+                <textarea
+                    id="textarea-reachout"
+                    class="textarea-reachout"
+                ></textarea>
+                <div class="reachout reachout-send-container">
+                    <button class="button-reachout-send" onclick="handleSend()">
+                        Send
                     </button>
-                    <div id="latest" class="div-center-links">
-                        <img class="load-spin" src="circle-notch-solid.svg" />
-                    </div>
-                    <button
-                        id="button-reachout"
-                        onclick="toggleButton('reachout')"
-                    >
-                        Reach Out<img
-                            id="arrow-reachout"
-                            class="arrow"
-                            src="level-up-alt-solid.svg"
-                        />
-                    </button>
-                    <div id="reachout" class="div-center-links reachout">
-                        <textarea
-                            id="textarea-reachout"
-                            class="textarea-reachout"
-                        ></textarea>
-                        <div class="reachout reachout-send-container">
-                            <button
-                                class="textarea-reachout-send"
-                                onclick="handleSend()"
-                            >
-                                Send
-                            </button>
-                            <span
-                                class="reachout-send-results"
-                                id="reachout-send-results"
-                            ></span>
-                            <img
-                                class="load-spin load-spin-send"
-                                src="circle-notch-solid.svg"
-                            />
-                        </div>
-                    </div>
-                    <a
-                        id="button-linkedin"
-                        href="https://linkedin.com/in/tylerjwoodfin"
-                        target="_new"
-                        >LinkedIn</a
-                    >
+                    <span
+                        class="reachout-send-results"
+                        id="reachout-send-results"
+                    ></span>
+                    <img
+                        class="load-spin load-spin-send hidden"
+                        src="/assets/loading.svg"
+                    />
                 </div>
             </div>
+
+            <!-- linkedin -->
+            <a
+                id="button-linkedin"
+                href="https://linkedin.com/in/tylerjwoodfin"
+                target="_new"
+                >LinkedIn</a
+            >
         </div>
     </body>
 </html>

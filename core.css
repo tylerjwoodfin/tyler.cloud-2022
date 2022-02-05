@@ -2,10 +2,7 @@ body {
     font-family: "Source Sans Pro", sans-serif;
     color: #d8d8d8;
     font-size: 30px;
-    background-image: url("tile.png");
-}
-
-.div-center {
+    background-image: url("/assets/tile.png");
     margin: 0;
     position: absolute;
     top: 30%;
@@ -14,19 +11,23 @@ body {
     transform: translate(-50%, -50%);
 }
 
+.hidden {
+    display: none !important;
+}
+
 .div-center-title,
-.div-center-links {
+.div-links {
     text-align: left;
     max-width: 400px;
 }
 
-.div-center-links-container {
+.div-links-container {
     display: flex;
     margin: auto;
     position: absolute;
 }
 
-.div-center-links {
+.div-links {
     display: flex;
     flex-direction: column;
     width: min(100%, 400px);
@@ -81,7 +82,7 @@ button:focus-visible,
     background-color: transparent;
 }
 
-.textarea-reachout-send {
+.button-reachout-send {
     text-align: right;
     font-size: 32px;
 }
@@ -96,12 +97,6 @@ textarea:focus {
 
 .bottom-padding {
     margin-bottom: 30%;
-}
-
-.fa-circle-notch {
-    display: block;
-    font-size: 35px;
-    color: darkorange;
 }
 
 .reachout {

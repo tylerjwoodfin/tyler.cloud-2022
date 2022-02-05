@@ -1,9 +1,12 @@
-function initialize() {
+// initialize
+$(document).ready(function () {
+    $("#reachout").removeClass("hidden");
+    $("#latest").removeClass("hidden");
+    $(`.load-spin-send`).removeClass("hidden");
+    $("#reachout").hide();
     $("#latest").hide();
     $(`.load-spin-send`).hide();
-    $("#reachout").hide();
-    // getLatest();
-}
+});
 
 function getLatest() {
     $.getJSON("https://api.github.com/users/tylerjwoodfin/repos", {
@@ -32,7 +35,7 @@ function toggleButton(name) {
         getLatest();
     }
     if (name === "reachout") {
-        $(`.textarea-reachout-send`).show();
+        $(`.button-reachout-send`).show();
         $(`.textarea-${name}`)[0].focus();
     }
 
@@ -53,7 +56,7 @@ function toggleButton(name) {
 }
 
 function handleSend() {
-    $(`.textarea-reachout-send`).hide();
+    $(`.button-reachout-send`).hide();
     $(`.load-spin-send`).show();
 
     $.get(
@@ -72,7 +75,7 @@ function handleSend() {
         $("#reachout-send-results").html(
             "There was a problem sending your message. Please reach out through <a href='https://linkedin.com/in/tylerjwoodfin' target='_new'>LinkedIn</a>."
         );
-        $(`.textarea-reachout-send`).show();
+        $(`.button-reachout-send`).show();
         $(`.load-spin-send`).hide();
     });
 }
