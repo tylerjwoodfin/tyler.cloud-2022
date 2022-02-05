@@ -27,7 +27,7 @@
             </div>
             <div class="div-center-links-container">
                 <div class="div-center-links bottom-padding">
-                    <button id="button-latest" onclick="toggleLatest()">
+                    <button id="button-latest" onclick="toggleButton('latest')">
                         Latest Work<img
                             id="arrow-latest"
                             src="level-up-alt-solid.svg"
@@ -46,8 +46,21 @@
                         />
                     </button>
                     <div id="reachout" class="div-center-links reachout">
-                        <textarea class="textarea-reachout"></textarea>
-                        <a class="textarea-reachout-send" href="">Send</a>
+                        <textarea
+                            id="textarea-reachout"
+                            class="textarea-reachout"
+                        ></textarea>
+                        <div class="reachout reachout-send-container">
+                            <button
+                                class="textarea-reachout-send"
+                                onclick="handleSend()"
+                            >
+                                Send
+                            </button>
+                            <i
+                                class="textarea-reachout-send-loading fa fa-circle-notch fa-spin"
+                            ></i>
+                        </div>
                     </div>
                     <a
                         id="button-linkedin"

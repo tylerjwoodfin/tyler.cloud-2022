@@ -3,7 +3,6 @@ body {
     color: #d8d8d8;
     font-size: 30px;
     background-image: url("tile.png");
-    overflow-x: hidden;
 }
 
 .div-center {
@@ -18,6 +17,7 @@ body {
 .div-center-title,
 .div-center-links {
     text-align: left;
+    max-width: 400px;
 }
 
 .div-center-links-container {
@@ -29,7 +29,8 @@ body {
 .div-center-links {
     display: flex;
     flex-direction: column;
-    width: fit-content;
+    width: min(100%, 400px);
+    overflow-x: hidden;
 }
 
 .header {
@@ -54,8 +55,12 @@ button {
 
 a:hover,
 button:hover,
+a:focus-visible,
+button:focus-visible,
 .underline {
     text-decoration: underline;
+    outline-offset: 0;
+    outline: none;
 }
 
 .sub {
@@ -69,6 +74,7 @@ button:hover,
     border: 2px solid #d8d8d8;
     color: #d8d8d8;
     resize: none;
+    margin-bottom: 10px;
     font-size: 32px;
     font-family: "Source Sans Pro", sans-serif;
     padding: 8px;
@@ -78,6 +84,10 @@ button:hover,
 .textarea-reachout-send {
     text-align: right;
     font-size: 32px;
+}
+
+.reachout-send-container {
+    width: 150px;
 }
 
 textarea:focus {
@@ -97,6 +107,9 @@ textarea:focus {
 .reachout {
     text-align: right;
     display: block;
+    padding-bottom: 30px;
+    width: 100%;
+    min-width: 100%;
 }
 
 #arrow-latest,

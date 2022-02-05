@@ -1,5 +1,6 @@
 function initialize() {
     $("#latest").hide();
+    $(`.textarea-reachout-send-loading`).hide();
     $("#reachout").hide();
     getLatest();
 }
@@ -24,24 +25,32 @@ function getLatest() {
         });
 }
 
-function toggleLatest() {
-    if ($("#latest")[0].innerHTML.split("<a").length < 2) {
-        getLatest();
-    }
-
-    toggleButton("latest");
-}
-
 function toggleButton(name) {
     $(`#${name}`).toggle();
+
+    if (name === "latest" && $("#latest")[0].innerHTML.split("<a").length < 2) {
+        getLatest();
+    }
+    if (name === "reachout") {
+        $(`.textarea-${name}`)[0].focus();
+    }
+
+    // show
     if ($(`#${name}`)[0].style.display !== `none`) {
         $(`#button-${name}`)[0].style.textDecoration = `underline`;
         $(`[id^=button]`).not(`#button-${name}`).hide();
         $(`[id^=arrow]`).not(`#arrow-${name}`).hide();
         $(`[id^=arrow]`).show();
     } else {
+        //hide
+        $(`textarea`).val("");
         $(`#button-${name}`)[0].style.textDecoration = ``;
         $(`[id^=arrow]`).hide();
         $(`[id^=button]`).show();
     }
+}
+
+function handleSend() {
+    $(`.textarea-reachout-send-loading`).show();
+    $(`.textarea-reachout-send`).hide();
 }
