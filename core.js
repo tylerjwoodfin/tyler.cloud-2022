@@ -63,14 +63,14 @@ function handleSend() {
             $("#reachout-send-results").text(
                 "Thank you! Your message has been sent."
             );
+            $("#textarea-reachout")[0].value = "";
+            $(`.load-spin-send`).hide();
         },
         "text"
     ).fail(function () {
         $("#reachout-send-results").html(
             "Sorry, there was a problem sending your message. Please reach out through <a href='https://linkedin.com/in/tylerjwoodfin' target='_new'>LinkedIn</a>."
         );
+        $(`.load-spin-send`).hide();
     });
-
-    $("#textarea-reachout")[0].value = "";
-    $(`.load-spin-send`).hide();
 }
