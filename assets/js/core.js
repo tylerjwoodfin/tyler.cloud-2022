@@ -15,6 +15,10 @@ $(document).ready(function () {
 
   if (window.location.href.indexOf("about") > -1) {
     toggleButton("about");
+  } else if (window.location.href.indexOf("tpn") > -1) {
+    toggleButton("tpn");
+  } else if (window.location.href.indexOf("latest") > -1) {
+    toggleButton("latest");
   }
 });
 
