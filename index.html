@@ -48,38 +48,12 @@
         />
       </button>
       <div id="latest" class="div-links hidden">
-        <img class="load-spin" src="/assets/img/loading.svg" />
-      </div>
-
-      <!-- reach out -->
-      <button id="button-reachout" onclick="toggleButton('reachout')">
-        Reach Out<img
-          id="arrow-reachout"
-          class="arrow"
-          src="/assets/img/arrow.svg"
+        <img
+          class="load-spin"
+          id="load-spin-latest"
+          src="/assets/img/loading.svg"
         />
-      </button>
-      <div id="reachout" class="div-links reachout hidden">
-        <textarea id="textarea-reachout" class="textarea-reachout"></textarea>
-        <div class="reachout reachout-send-container">
-          <button class="button-reachout-send" onclick="handleSend()">
-            Send
-          </button>
-          <span class="reachout-send-results" id="reachout-send-results"></span>
-          <img
-            class="load-spin load-spin-send hidden"
-            src="/assets/img/loading.svg"
-          />
-        </div>
       </div>
-
-      <!-- linkedin -->
-      <a
-        id="button-linkedin"
-        href="https://linkedin.com/in/tylerjwoodfin"
-        target="_new"
-        >LinkedIn</a
-      >
 
       <!-- about -->
       <button id="button-about" onclick="toggleButton('about')">
@@ -98,6 +72,57 @@
           <a href="https://www.tyler.cloud/airbnb" target="_new">an Airbnb</a>
           if you're looking to visit the Austin area!
         </p>
+      </div>
+
+      <!-- linkedin -->
+      <a
+        id="button-linkedin"
+        href="https://linkedin.com/in/tylerjwoodfin"
+        target="_new"
+        >LinkedIn</a
+      >
+
+      <!-- reach out -->
+      <button id="button-reachout" onclick="toggleButton('reachout')">
+        Reach Out<img
+          id="arrow-reachout"
+          class="arrow"
+          src="/assets/img/arrow.svg"
+        />
+      </button>
+      <div id="reachout" class="reachout div-links hidden">
+        <textarea id="textarea-reachout" class="textarea-reachout"></textarea>
+        <div class="reachout reachout-send-container">
+          <button class="button-reachout-send" onclick="handleSend()">
+            Send
+          </button>
+          <span class="reachout-send-results" id="reachout-send-results"></span>
+          <img
+            class="load-spin load-spin-send hidden"
+            src="/assets/img/loading.svg"
+          />
+        </div>
+      </div>
+
+      <!-- more -->
+      <button id="button-more" onclick="toggleButton('more')">
+        More<img id="arrow-more" class="arrow" src="/assets/img/arrow.svg" />
+      </button>
+      <div id="more" class="more div-links hidden">
+        <a href="/games/rundino/" class="sub" target="_new">Run, Dino</a>
+        <a
+          href="https://play.google.com/store/apps/details?id=cloud.tyler.billionslottery"
+          class="sub"
+          target="_new"
+          >Billions Lottery
+        </a>
+        <a
+          href="https://play.google.com/store/apps/details?id=tylerwoodfin.com.fourlittleletters"
+          class="sub"
+          target="_new"
+          >Four Little Letters</a
+        >
+        <a href="/tpn" class="sub" target="_new">My 2006 Website</a>
       </div>
     </div>
   </body>
