@@ -2,7 +2,7 @@ body {
     font-family: "Source Sans Pro", sans-serif;
     color: #d8d8d8;
     font-size: 30px;
-    background-image: url("/assets/tile.png");
+    background-image: url("/assets/img/tile.png");
     margin: 0;
     position: absolute;
     top: 30%;

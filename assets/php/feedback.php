@@ -16,22 +16,17 @@
             $Subject = $_GET['subject'];
             $Message = $_GET['message'];
             
-            if(strlen($Subject) > 0 && strlen($Message) > 0)
+            if(strlen($Subject) > 0 && strlen($Message) > 0 && strcmp($Subject, "Website") == 0)
             {
-                echo "200";
-                
-                if(strcmp($Subject, "Website") == 0)
+                $message = $_REQUEST['message'] ;
+                $headers = "From:tyler@tyler.cloud";
+                $a = mail("tyler@tyler.cloud", "Website Feedback", $Message, $headers );
+                if ($a)
                 {
-                    $message = $_REQUEST['message'] ;
-                    $headers = "From:tyler@tyler.cloud";
-                    $a = mail("tyler@tyler.cloud", "Website Feedback", $Message, $headers );
-                    if ($a)
-                    {
-                         print("200");
-                    } else {
-                         print("500");
-                    }   
-                }
+                        print("200");
+                } else {
+                        print("500");
+                }   
         
             }
             else
