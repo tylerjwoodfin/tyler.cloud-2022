@@ -8,6 +8,10 @@ $(document).ready(function () {
   $(`.load-spin-send`).hide();
   $(`.about`).removeClass("hidden");
   $(`.about`).hide();
+
+  if (window.location.href.indexOf("about") > -1) {
+    toggleButton("about");
+  }
 });
 
 function getLatest() {
@@ -54,6 +58,10 @@ function toggleButton(name) {
     $(`[id^=arrow]`).hide();
     $(`[id^=button]`).show();
     $("#reachout-send-results").html("");
+
+    if (name === "about") {
+      history.pushState({}, "Tyler Woodfin", "/");
+    }
   }
 }
 
