@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Run, Dino</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <link
+      href="https://www.tyler.cloud/assets/img/favicon.ico"
+      rel="shortcut icon"
+    />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=NO"
+    />
+  </head>
+  <body>
+    <canvas id="canvas"></canvas>
+
+    <script>
+      // prevent zooming
+      var resolution = window.devicePixelRatio;
+      var w = window.innerWidth;
+      var h = window.innerHeight;
+      var w2 = Math.round(w * resolution);
+      var h2 = Math.round(h * resolution);
+      canvas.style.width = w + "px";
+      canvas.style.height = h + "px";
+      var lightsOn = true;
+      var screenTouched = false;
+      var isTouchScreen = function () {
+        return screenTouched || canvas.width < canvas.height;
+      };
+
+      // font
+      var font = {};
+      font.weight = "normal ";
+      font.large = function () {
+        return !isTouchScreen()
+          ? Math.max(Math.floor(canvas.width / 20), 60)
+          : Math.max(Math.floor(canvas.width / 40), 40);
+      };
+      font.small = function () {
+        return !isTouchScreen()
+          ? Math.max(Math.floor(canvas.width / 80), 25)
+          : font.large() / 2;
+      };
+
+      font.style = "px Courier New";
+      font.color = function () {
+        return lightsOn ? "#424242" : "#ffffff";
+      };
+
+      function sound(src) {
+        this.sound = document.createElement("audio");
+        this.sound.src = src;
+        this.sound.setAttribute("preload", "auto");
+        this.sound.setAttribute("controls", "none");
+        this.sound.setAttribute("id", src);
+        this.sound.style.display = "none";
+        document.body.appendChild(this.sound);
+
+        this.play = function () {
+          if (muted) {
+            this.sound.volume = 0;
+          }
+
+          this.sound.play();
+        };
+        this.stop = function () {
+          this.sound.pause();
+          document.getElementById(this.sound.id).currentTime = 0;
+        };
+      }
+
+      // Dino
+      var img = new Image(); // Create new img element
+      img.addEventListener(
+        "load",
+        function () {
+          // execute drawImage statements here
+        },
+        false
+      );
+      img.src = "square.png"; // Set source path
+      var thrusting = false;
+      var ableToStart = true; // used to prevent "thrusting" through the end game... we need a keyup first
+
+      // score
+      var score = 0;
+      var gameStarted = false;
+      var gameEnded = false;
+      var highScores = [];
+      var name = "";
+      var extraLives = 0;
+      var extraLivesText = "";
+
+      // "showing" variables
+      var showingInstructions = false;
+      var showingHighScores = false;
+      var allowedToSubmitHighScore = false;
+      var enteringHighScore = false;
+      var highScoreName = "";
+      var showingText = "";
+      var currentTextArray = [];
+
+      var instructions = [
+        "Instructions",
+        "You are Dino.",
+        "Dino doesn't like circles. Why should he? Squares are a much more efficient use of space.",
+        "Circles... scare Dino.",
+        "Use the mouse or arrow keys to move up and down. Press Space to boost forward.",
+        "DON'T YOU DARE touch a scary circle!!",
+        "Oh, but they can't hurt you when you're flashing.",
+        "Grab power-ups like 🏁 and 🐌. I'll explain them when you get them.",
+      ];
+
+      var instructionsMobile = [
+        "Instructions",
+        "You are Dino.",
+        "Dino doesn't like circles.",
+        "They... scare him.",
+        "Tap to move.",
+        "DON'T YOU DARE run into a circle!",
+        "Grab any non-circles you see.",
+      ];
+
+      // key listeners
+      document.addEventListener("keydown", keyDownHandler, false);
+      document.addEventListener("keyup", keyUpHandler, false);
+      document.addEventListener("mousemove", mouseMoveHandler, false);
+      document.addEventListener("touchstart", touchHandler, false);
+      document.addEventListener("touchend", touchEndHandler, false);
+
+      // colors
+      var colors = [
+        "#FF6633",
+        "#FFB399",
+        "#FF33FF",
+        "#FFFF99",
+        "#00B3E6",
+        "#E6B333",
+        "#3366E6",
+        "#999966",
+        "#99FF99",
+        "#B34D4D",
+        "#80B300",
+        "#809900",
+        "#E6B3B3",
+        "#6680B3",
+        "#66991A",
+        "#FF99E6",
+        "#CCFF1A",
+        "#FF1A66",
+        "#E6331A",
+        "#33FFCC",
+        "#66994D",
+        "#B366CC",
+        "#4D8000",
+        "#B33300",
+        "#CC80CC",
+        "#66664D",
+        "#991AFF",
+        "#E666FF",
+        "#4DB3FF",
+        "#1AB399",
+        "#E666B3",
+        "#33991A",
+        "#CC9999",
+        "#B3B31A",
+        "#00E680",
+        "#4D8066",
+        "#809980",
+        "#E6FF80",
+        "#1AFF33",
+        "#999933",
+        "#FF3380",
+        "#CCCC00",
+        "#66E64D",
+        "#4D80CC",
+        "#9900B3",
+        "#E64D66",
+        "#4DB380",
+        "#FF4D4D",
+        "#99E6E6",
+        "#6666FF",
+      ];
+
+      // you died messages
+      var deathMessages = [
+        "You died.",
+        "Oops",
+        "Did someone die?",
+        "lol",
+        "DOOM",
+        "Oof",
+        "lmao",
+        "Pathetic.",
+        "That was fast.",
+        "Really?",
+        "What a cute try.",
+        "RIP",
+        "What a shame.",
+        "Do better next time.",
+        "Try not dying next time.",
+        "That's all you've got?",
+        "There's not an easy mode.",
+        "Is this your first video game?",
+        "You're hilarious.",
+        "Stop crying.",
+        "First time?",
+        "That was hard to watch.",
+        "Stick to jigsaw puzzles.",
+        "We can pretend that one didn't count.",
+      ];
+      var deathMessage;
+
+      // sound
+      var clearSound = new sound("bloop.mp3");
+      var deathSound = new sound("death.mp3");
+      var explosionSound = new sound("explosion.mp3");
+      var backgroundSound = new sound("background.mp3");
+      var lightSound = new sound("light.mp3");
+      var loseLifeSound = new sound("loselife.mp3");
+      var gainLifeSound = new sound("gainlife.mp3");
+      var thrustingSound = new sound("thrusting.mp3");
+      var unthrustingSound = new sound("unthrusting.mp3");
+
+      // loop
+      document.getElementById("background.mp3").loop = true;
+
+      var movingDown = false;
+      var movingUp = false;
+
+      var canToggleLights = true;
+      var muted = false;
+      var token = "";
+
+      function spaceBarHandler() {
+        if (ableToStart) {
+          showingInstructions = false;
+          showingHighScores = false;
+          showingText = false;
+        }
+
+        if (!gameStarted || (gameEnded && ableToStart)) {
+          gameStarted = true;
+          gameEnded = false;
+          score = 0;
+          extraLives = 0;
+          extraLivesText = "";
+          document.body.style.cursor = "none";
+          initializeDino();
+          backgroundSound.play();
+
+          // Get Token
+          $.ajax({
+            url: "../php/getToken.php",
+            type: "get",
+            success: function (response) {
+              token = response;
+            },
+            error: function (response) {
+              console.log("error: " + response);
+            },
+          });
+
+          // Cache High Scores
+          if (highScores.length == 0) {
+            // Get High Scores
+            $.ajax({
+              url: "../php/getHighScores.php",
+              type: "get",
+              data: { GameID: 1 },
+              success: function (response) {
+                highScores = JSON.parse(response);
+                console.log(highScores);
+              },
+            });
+          }
+        } // game started
+        else {
+          thrusting = true;
+          ableToStart = false;
+        }
+      }
+
+      function keyDownHandler(e) {
+        if (enteringHighScore) {
+          if ((47 < e.keyCode && e.keyCode < 91) || e.keyCode == 32) {
+            highScoreName += e.key;
+          } else if (e.key == "Backspace") {
+            highScoreName = highScoreName.slice(0, -1);
+          } else if (e.keyCode == 13) {
+            // enter
+            if (highScoreName.length > 0) {
+              $.ajax({
+                url: "../php/post.php",
+                type: "post",
+                data: {
+                  PlayerName: highScoreName,
+                  Score: score,
+                  GameID: 1,
+                  Token: token,
+                },
+                success: function (response) {
+                  response = response.trim();
+                  if (response == "200") {
+                    enteringHighScore = false;
+                    score = -1;
+                    // Get High Scores
+                    $.ajax({
+                      url: "../php/getHighScores.php",
+                      type: "get",
+                      type: "post",
+                      data: { GameID: 1 },
+                      success: function (response) {
+                        highScores = JSON.parse(response);
+                        showingHighScores = true;
+                      },
+                    });
+                  } else {
+                    // alert("." + response + ".");
+                  }
+                },
+              });
+            } else {
+              enteringHighScore = false;
+              showingHighScores = true;
+            }
+          }
+        } else if (
+          e.key == "Up" ||
+          e.key == "ArrowUp" ||
+          e.key == "ArrowRight"
+        ) {
+          movingUp = true;
+        } else if (
+          e.key == "Down" ||
+          e.key == "ArrowDown" ||
+          e.key == "ArrowLeft"
+        ) {
+          movingDown = true;
+        } else if (e.keyCode == 32) {
+          // space
+          spaceBarHandler();
+        } else if (e.keyCode == 73) {
+          // i
+          if (!gameStarted || gameEnded) {
+            showingInstructions = !showingInstructions;
+          }
+        } else if (e.keyCode == 77) {
+          // m
+          muted = !muted;
+
+          if (gameStarted) {
+            if (!muted) {
+              for (i in document.getElementsByTagName("audio")) {
+                document.getElementsByTagName("audio")[i].volume = 1;
+              }
+            } else {
+              for (i in document.getElementsByTagName("audio")) {
+                document.getElementsByTagName("audio")[i].volume = 0;
+              }
+            }
+          }
+        } else if (e.keyCode == 68) {
+          // d
+          if (canToggleLights) {
+            canToggleLights = false;
+            lightsOn = !lightsOn;
+            canvas.style.background = lightsOn ? "#eee" : "#000000";
+
+            setTimeout(function () {
+              canToggleLights = true;
+            }, 2000);
+          }
+        } else if (e.keyCode == 13) {
+          // Enter
+          if (allowedToSubmitHighScore) {
+            enteringHighScore = true;
+          }
+        }
+      }
+
+      function keyUpHandler(e) {
+        if (e.key == "Up" || e.key == "ArrowUp") {
+          movingUp = false;
+        } else if (e.key == "Down" || e.key == "ArrowDown") {
+          movingDown = false;
+        } else if (e.keyCode == 32) {
+          //space bar
+          thrusting = false;
+          ableToStart = true;
+        }
+      }
+
+      function mouseMoveHandler(e) {
+        if (!isTouchScreen()) {
+          var relativeY = e.clientY;
+          if (relativeY > 0 && relativeY < canvas.height) {
+            dino.y = relativeY - dino.height / 2;
+
+            if (dino.y > canvas.height - dino.height) {
+              dino.y = canvas.height - dino.height;
+            }
+
+            if (dino.y < 0) {
+              dino.y = 0;
+            }
+          }
+        }
+      }
+
+      function touchHandler(e) {
+        screenTouched = true;
+
+        console.log(e.touches);
+        if (
+          !gameStarted &&
+          !gameEnded &&
+          e.touches[0].clientY < canvas.height / 5
+        ) {
+          // touched top 20% on title
+          showingInstructions = !showingInstructions;
+        } else {
+          if (canvas.width > canvas.height) {
+            alert(
+              "This game should be played in portrait mode on mobile devices. Please rotate and refresh!"
+            );
+            throw new Error();
+          }
+          spaceBarHandler();
+        }
+      }
+
+      function touchEndHandler(e) {
+        thrusting = false;
+        ableToStart = true;
+      }
+
+      function random(max) {
+        return Math.floor(Math.random() * Math.floor(max));
+      }
+
+      //initialize dino
+      var dino = {};
+      function initializeDino() {
+        if (isTouchScreen()) {
+          dino.height = canvas.width / 12;
+        } else {
+          dino.height = canvas.height / 12;
+        }
+
+        dino.width = dino.height;
+        dino.x = 10;
+        dino.y = canvas.height - dino.height;
+        dino.birth = Date.now();
+      }
+
+      // initialize obstacles
+      obstacles = [];
+
+      function initializeObstacle(o) {
+        var fractionsOfCanvas = [15, 25, 30, 35];
+
+        if (random(100) == 5) {
+          fractionsOfCanvas *= 2;
+        }
+
+        o.diameter =
+          canvas.height / fractionsOfCanvas[random(fractionsOfCanvas.length)];
+
+        if (random(75) == 15) {
+          o.diameter *= 2;
+        }
+
+        if (!isTouchScreen()) {
+          o.x = canvas.width + o.diameter + 10;
+          o.y = canvas.height - random(canvas.height);
+        } // mobile
+        else {
+          o.y = 0 - 50 + random(20);
+          o.x = canvas.height - random(canvas.height);
+        }
+
+        o.dx = 0 - (random(5) + 3) - Math.min(10, Math.floor(score / 35));
+
+        o.dy =
+          random(10) > 7 ? (random(2) == 1 ? random(4) : 0 - random(4)) : 0;
+
+        var powerup = random(200);
+        if (powerup == 1) {
+          o.status = "slow";
+        } else if (powerup == 2) {
+          o.status = "bomb";
+        } else if (powerup == 3) {
+          o.status = "light";
+        } else if (powerup == 4 && extraLives < 2) {
+          o.status = "life";
+        } else {
+          o.color = colors[random(colors.length)];
+          o.status = "kill";
+        }
+
+        return o;
+      }
+
+      function initializeObstacles() {
+        for (var i = 0; i < random(15) + 10; i++) {
+          setInterval(function () {
+            var limit = score < 300 ? 14 + Math.floor(score / 10) : 40;
+
+            if (obstacles.length < limit) {
+              obstacles.push(initializeObstacle({}));
+            }
+          }, 300);
+        }
+      }
+
+      // resize to fit
+      (function () {
+        var canvas = document.getElementById("canvas");
+        var ctx = canvas.getContext("2d");
+
+        // resize the canvas to fill browser window dynamically
+        // window.addEventListener('resize', resizeCanvas, false);
+
+        function resizeCanvas() {
+          console.log("Resizing, " + window.innerHeight);
+          canvas.width = window.innerWidth;
+          canvas.height = window.innerHeight;
+        }
+
+        function showText(text) {
+          if (!showingInstructions && !showingHighScores) {
+            ctx.font = font.weight + font.large() + font.style;
+            ctx.textAlign = "center";
+            ctx.fillStyle = font.color();
+            ctx.fillText(text, canvas.width / 2, canvas.height / 2);
+          }
+        }
+
+        function showSubText(text) {
+          ctx.font = font.weight + font.small() + font.style;
+          ctx.fillStyle = font.color();
+          ctx.textAlign = "center";
+          ctx.fillText(
+            text,
+            canvas.width / 2,
+            canvas.height / 2 + canvas.height / 30
+          );
+        }
+
+        function showTextArray(startingHeight) {
+          for (var i in currentTextArray) {
+            if (currentTextArray[i].includes("Name:")) {
+              font.weight = "bold ";
+              ctx.textAlign = "left";
+              ctx.fillText(
+                currentTextArray[i],
+                canvas.width / 4,
+                startingHeight + i * 50
+              );
+            } else {
+              if (
+                currentTextArray[i].includes("Your Score: ") ||
+                currentTextArray[i].includes("Great work.")
+              ) {
+                font.weight = "bold ";
+              }
+
+              if (isTouchScreen() && i == 0) {
+                font.weight = "bold ";
+              }
+              var size = isTouchScreen()
+                ? font.small()
+                : i == 0
+                ? font.large()
+                : font.small();
+              ctx.font = font.weight + size + font.style;
+              ctx.fillStyle = font.color();
+              ctx.textAlign = "center";
+              ctx.fillText(
+                currentTextArray[i],
+                canvas.width / 2,
+                startingHeight + i * 50
+              );
+            }
+
+            font.weight = "normal ";
+          }
+        }
+
+        function showHighScores(highScores) {
+          ctx.textAlign = "center";
+          currentTextArray = [];
+          var toShow = [];
+          toShow.push(deathMessage);
+
+          if (highScores.length > 0) {
+            if (!showingInstructions) {
+              for (var i in highScores) {
+                toShow.push(
+                  highScores[i].PlayerName + "\t\t\t" + highScores[i].Score
+                );
+              }
+
+              if (!enteringHighScore) {
+                if (score > -1) {
+                  toShow.push("Your Score: " + score);
+                } else {
+                  allowedToSubmitHighScore = false;
+                  toShow.push("Great work.");
+                }
+
+                if (highScores[highScores.length - 1].Score < score) {
+                  allowedToSubmitHighScore = true;
+                  toShow.push("Press Enter to submit your score.");
+                }
+
+                toShow.push(" ");
+              } else {
+                var cursor = Math.floor(Date.now() / 800) % 2 == 0 ? "|" : "";
+                toShow.push("Name: " + highScoreName + cursor);
+              }
+            }
+          } else {
+            toShow.push("High scores not available");
+          }
+
+          currentTextArray = toShow;
+          showTextArray(canvas.height / 6);
+        }
+
+        function showInstructionLink(text) {
+          ctx.font = font.weight + font.small() + font.style;
+          ctx.fillStyle = font.color();
+          ctx.textAlign = "center";
+          ctx.fillText(text, canvas.width / 2, canvas.height - 100);
+        }
+
+        resizeCanvas();
+        initializeObstacles();
+
+        function drawScore() {
+          ctx.textAlign = "left";
+          ctx.font = font.weight + font.small() + font.style;
+          ctx.fillStyle = ctx.fillStyle = font.color();
+
+          if (!gameStarted && !gameEnded) {
+            var muteText = "Press M to mute";
+            if (muted) {
+              ctx.fillStyle = "red";
+              muteText = "Press M to unmute";
+            }
+
+            if (isTouchScreen()) {
+              muteText = "Instructions";
+            }
+
+            ctx.fillText(muteText + " " + extraLivesText, 50, 30);
+          } else {
+            ctx.fillText(score + " " + extraLivesText, 50, 30);
+          }
+        }
+
+        function drawTitle() {
+          if (!showingText && !showingHighScores) {
+            showText("Run, Dino");
+
+            if (!showingInstructions) {
+              if (!isTouchScreen()) {
+                showInstructionLink("Press I for Instructions");
+              } else {
+                showInstructionLink("Tap to Play");
+              }
+            }
+          }
+
+          if (!showingInstructions && !showingHighScores) {
+            if (!isTouchScreen() && Math.floor(Date.now() / 1000) % 4 < 2) {
+              showSubText("Press Space to Play");
+            } else {
+              showSubText("Avoid Circles");
+            }
+          } else {
+            if (!isTouchScreen()) {
+              showInstructionLink("Press Space to Play");
+            } else {
+              showInstructionLink("Tap here to Play");
+            }
+          }
+        }
+
+        function drawEndingTitle() {
+          document.body.style.cursor = "auto";
+          ctx.textAlign = "center";
+          ctx.font = font.weight + font.small() + font.style;
+
+          if (!showingInstructions) {
+            if (!enteringHighScore) {
+              if (!isTouchScreen()) {
+                if (Math.floor(Date.now() / 1000) % 4 < 2) {
+                  ctx.fillText(
+                    "Press Space to Continue",
+                    canvas.width / 2,
+                    canvas.height * 0.9
+                  );
+                } else {
+                  ctx.fillText(
+                    "Press I for Instructions",
+                    canvas.width / 2,
+                    canvas.height * 0.9
+                  );
+                }
+              } else {
+                ctx.fillText(
+                  "Tap to continue",
+                  canvas.width / 2,
+                  canvas.height * 0.9
+                );
+              }
+            } else {
+              ctx.fillText(
+                "Press Enter to Submit",
+                canvas.width / 2,
+                canvas.height * 0.9
+              );
+            }
+          }
+        }
+
+        function drawObstacle(o) {
+          ctx.beginPath();
+          ctx.fillStyle = o.color;
+
+          if (o.status == "kill") {
+            ctx.arc(o.x, o.y, o.diameter / 2, 0, Math.PI * 2);
+          } else {
+            ctx.font = font.weight + 1.3 * o.diameter + font.style;
+            ctx.textAlign = "center";
+            var icon = "";
+
+            if (o.status == "slow") {
+              icon = "🐌";
+            } else if (o.status == "bomb") {
+              icon = "🏁";
+            } else if (o.status == "light") {
+              icon = "💡";
+            } else if (o.status == "life") {
+              icon = "💜";
+            } else if (o.status == "clear") {
+              icon = "";
+            }
+
+            ctx.fillText(icon, o.x, o.y);
+          }
+
+          ctx.fill();
+          ctx.closePath();
+        }
+
+        function drawDino() {
+          ctx.beginPath();
+          ctx.fillStyle = "rgba(20, 64, 208, 0.44)";
+
+          if (
+            Date.now() - dino.birth > 3000 ||
+            Math.floor(Date.now() / 75) % 10 < 5
+          ) {
+            ctx.drawImage(img, dino.x, dino.y, dino.width, dino.height);
+          } else {
+            // showSubText("You're Indestructible!");
+            ctx.fillRect(dino.x, dino.y, dino.width, dino.height);
+          }
+
+          ctx.fill();
+          ctx.closePath();
+        }
+
+        function draw() {
+          // anything above this line will be cleared...
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+          if (showingText) {
+            showText(showingText);
+          }
+
+          if (showingInstructions) {
+            console.log("Showing instructions " + isTouchScreen());
+            currentTextArray = !isTouchScreen()
+              ? instructions
+              : instructionsMobile;
+            showTextArray(canvas.height / 4 + canvas.width / 50);
+          }
+
+          if (showingHighScores) {
+            showHighScores(highScores);
+          }
+
+          if (gameStarted) {
+            if (gameEnded) {
+              drawEndingTitle();
+            } else {
+              drawDino();
+            }
+          } else {
+            drawTitle();
+          }
+
+          drawScore();
+
+          // draw each obstacle
+          for (i in obstacles) {
+            drawObstacle(obstacles[i]);
+          }
+
+          for (i in obstacles) {
+            var obstacleCleared = obstacles[i].x + obstacles[i].diameter < 0;
+            if (isTouchScreen()) {
+              obstacleCleared =
+                obstacles[i].y + obstacles[i].diameter > canvas.height;
+            }
+
+            // detect walls:
+            if (obstacleCleared) {
+              // obstacle cleared
+
+              if (gameStarted && !gameEnded && obstacles[i].status != "clear") {
+                score++;
+
+                clearSound.play();
+              }
+
+              obstacles.splice(i, 1);
+
+              continue;
+            }
+
+            if (
+              dino.x < obstacles[i].x + obstacles[i].diameter / 2 &&
+              dino.y < obstacles[i].y + obstacles[i].diameter / 2 &&
+              dino.x + dino.width >
+                obstacles[i].x - obstacles[i].diameter / 2 &&
+              dino.y + dino.height >
+                obstacles[i].y - obstacles[i].diameter / 2 &&
+              !gameEnded &&
+              Date.now() - dino.birth > 3000
+            ) {
+              // collision
+
+              if (obstacles[i].status == "kill") {
+                if (extraLives <= 0) {
+                  if (thrusting) {
+                    thrusting = false;
+                  }
+                  obstacles = [];
+                  backgroundSound.stop();
+
+                  deathSound.play();
+                  deathMessage = deathMessages[random(deathMessages.length)];
+                  gameEnded = true;
+                  showingHighScores = true;
+                } else {
+                  extraLives -= 1;
+                  extraLivesText = extraLivesText.slice(0, -2);
+                  loseLifeSound.play();
+                  dino.birth = Date.now();
+                  obstacles.splice(i, 1);
+                }
+
+                break;
+              } else if (obstacles[i].status == "slow") {
+                showingText = "We're going slow";
+
+                setTimeout(function () {
+                  showingText = "";
+                }, 2000);
+
+                for (k in obstacles) {
+                  obstacles[k].dx = obstacles[k].dx / 3;
+                }
+
+                obstacles.splice(i, 1);
+              } else if (obstacles[i].status == "bomb") {
+                explosionSound.play();
+                showingText = "A fresh start";
+                score += obstacles.length;
+
+                setTimeout(function () {
+                  showingText = "";
+                }, 2000);
+
+                for (var j in obstacles) {
+                  obstacles[j].status = "clear";
+                }
+
+                obstacles.splice(i, 1);
+                // obstacles = [];
+                // initializeObstacles();
+                break;
+              } else if (obstacles[i].status == "light") {
+                lightSound.play();
+
+                if (lightsOn) {
+                  showingText = "Lights Off";
+                  canvas.style.background = "#000000";
+                } else {
+                  showingText = "Lights On";
+                  canvas.style.background = "#eee";
+                }
+
+                lightsOn = !lightsOn;
+
+                setTimeout(function () {
+                  showingText = "";
+                }, 2000);
+
+                obstacles.splice(i, 1);
+
+                break;
+              } else if (obstacles[i].status == "life") {
+                showingText = "1 Up";
+
+                setTimeout(function () {
+                  showingText = "";
+                }, 2000);
+
+                gainLifeSound.play();
+                extraLives++;
+                extraLivesText += "🤍";
+
+                obstacles.splice(i, 1);
+
+                break;
+              } else if (obstacles[i].status == "clear") {
+                obstacles.splice(i, 1);
+              }
+            } else {
+              // move obstacle
+              if (canvas.width > canvas.height) {
+                obstacles[i].x +=
+                  random(10) > 8 ? obstacles[i].dx - 1 : obstacles[i].dx;
+                obstacles[i].y += obstacles[i].dy;
+              } // mobile or other portrait device
+              else {
+                obstacles[i].y -=
+                  random(10) > 8 ? obstacles[i].dx - 1 : obstacles[i].dx;
+                obstacles[i].x += obstacles[i].dy;
+              }
+
+              if (random(10000) == 2) {
+                obstacles[i].dy = random(3);
+
+                if (random(2) == 1) {
+                  obstacles[i].dy = 0 - obstacles[i].dy;
+                }
+              }
+            }
+          }
+
+          // detect dino movement
+          if (movingDown) {
+            dino.y += 7;
+            if (dino.y > canvas.height - dino.height) {
+              dino.y = canvas.height - dino.height;
+            }
+          } else if (movingUp) {
+            dino.y -= 7;
+            if (dino.y < 0) {
+              dino.y = 0;
+            }
+          }
+
+          if (thrusting) {
+            if (!showingHighScores) {
+              unthrustingSound.stop();
+
+              if (!isTouchScreen()) {
+                thrustingSound.play();
+              }
+
+              if (dino.x + dino.width < canvas.width) {
+                dino.x += 7;
+              } else {
+                dino.x = canvas.width - dino.width;
+              }
+            } else {
+              thrustingSound.stop();
+              unthrustingSound.stop();
+              dino.x = 0;
+            }
+          } else if (dino.x > 10) {
+            if (!isTouchScreen()) {
+              thrustingSound.stop();
+              unthrustingSound.play();
+            }
+
+            dino.x = Math.max(10, dino.x - 5);
+
+            if (dino.x == 10) {
+              unthrustingSound.stop();
+            }
+          }
+
+          requestAnimationFrame(draw);
+        }
+
+        if (!gameStarted) {
+          drawTitle();
+        }
+
+        draw();
+      })();
+    </script>
+  </body>
+</html>
