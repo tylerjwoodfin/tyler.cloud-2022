@@ -15,6 +15,10 @@ body {
   display: none !important;
 }
 
+img {
+  max-width: 100%;
+}
+
 .div-center-title,
 .div-links {
   text-align: left;

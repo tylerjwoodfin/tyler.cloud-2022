@@ -10,6 +10,8 @@ $(document).ready(function () {
   $(`.load-spin-send`).hide();
   $(`.about`).removeClass("hidden");
   $(`.about`).hide();
+  $(`#tpn`).removeClass("hidden");
+  $(`#tpn`).hide();
 
   if (window.location.href.indexOf("about") > -1) {
     toggleButton("about");
@@ -53,6 +55,16 @@ function toggleButton(name) {
     $(`[id^=button]`).not(`#button-${name}`).hide();
     $(`[id^=arrow]`).not(`#arrow-${name}`).hide();
     $(`[id^=arrow-${name}]`).show();
+
+    if (name === "more") {
+      $(`#button-tpn-sub`).show();
+    }
+
+    if (name === "tpn") {
+      $(`[class^=sub]`).hide();
+      $(`#button-tpn`).removeClass("hidden");
+      $(`#button-tpn`).show();
+    }
   } else {
     //hide
     $(`textarea`).val("");
@@ -63,6 +75,12 @@ function toggleButton(name) {
 
     if (name === "about") {
       history.pushState({}, "Tyler Woodfin", "/");
+    }
+
+    if (name === "tpn") {
+      toggleButton("more");
+      $(`[class^=sub]`).show();
+      $(`#button-tpn`).addClass("hidden");
     }
   }
 }
