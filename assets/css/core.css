@@ -1,57 +1,69 @@
 body {
-    font-family: "Source Sans Pro", sans-serif;
-    color: #d8d8d8;
-    font-size: 30px;
-    background-image: url("/assets/img/tile.png");
-    margin: 0;
-    position: absolute;
-    top: 30%;
-    left: 50%;
-    -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
+  font-family: "Source Sans Pro", sans-serif;
+  color: #d8d8d8;
+  font-size: 30px;
+  background-image: url("/assets/img/tile.png");
+  margin: 0;
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
 }
 
 .hidden {
-    display: none !important;
+  display: none !important;
 }
 
 .div-center-title,
 .div-links {
-    text-align: left;
-    max-width: 400px;
+  text-align: left;
+  padding-bottom: 30px;
+  max-width: 400px;
 }
 
 .div-links-container {
-    display: flex;
-    margin: auto;
-    position: absolute;
+  display: flex;
+  margin: auto;
+  position: absolute;
 }
 
 .div-links {
-    display: flex;
-    flex-direction: column;
-    width: min(100%, 400px);
-    overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  width: min(100%, 400px);
+  overflow-x: hidden;
 }
 
 .header {
-    font-weight: 300;
-    font-size: 80px;
+  font-weight: 300;
+  font-size: 80px;
+}
+
+.face {
+  display: block;
+  max-height: 45vh;
+  margin-left: 10%;
+  margin-right: 10%;
+  image-orientation: from-image;
+  -webkit-box-shadow: -14px 21px 28px -2px rgba(135, 135, 135, 0.34);
+  -moz-box-shadow: -14px 21px 28px -2px rgba(135, 135, 135, 0.34);
+  box-shadow: -14px 21px 28px -2px rgba(135, 135, 135, 0.34);
 }
 
 a,
 button {
-    font-family: "Source Sans Pro", sans-serif;
-    background: none;
-    border: none;
-    font-size: 38px;
-    text-decoration: none;
-    color: darkorange;
-    cursor: pointer;
-    padding: 0;
-    text-align: left;
-    width: max-content;
-    transition: 0.4s;
+  font-family: "Source Sans Pro", sans-serif;
+  background: none;
+  border: none;
+  font-size: 38px;
+  text-decoration: none;
+  color: darkorange;
+  cursor: pointer;
+  padding: 0;
+  text-align: left;
+  width: max-content;
+  transition: 0.4s;
 }
 
 a:hover,
@@ -59,85 +71,85 @@ button:hover,
 a:focus-visible,
 button:focus-visible,
 .underline {
-    text-decoration: underline;
-    outline-offset: 0;
-    outline: none;
+  text-decoration: underline;
+  outline-offset: 0;
+  outline: none;
 }
 
 .sub {
-    font-size: 32px;
-    padding-left: 32px;
+  font-size: 32px;
+  padding-left: 32px;
 }
 
 .textarea-reachout {
-    width: 100%;
-    height: 150px;
-    border: 2px solid #d8d8d8;
-    color: #d8d8d8;
-    resize: none;
-    margin-bottom: 10px;
-    font-size: 32px;
-    font-family: "Source Sans Pro", sans-serif;
-    padding: 8px;
-    background-color: transparent;
+  width: 100%;
+  height: 150px;
+  border: 2px solid #d8d8d8;
+  color: #d8d8d8;
+  resize: none;
+  margin-bottom: 10px;
+  font-size: 32px;
+  font-family: "Source Sans Pro", sans-serif;
+  padding: 8px;
+  background-color: transparent;
 }
 
 .button-reachout-send {
-    text-align: right;
-    font-size: 32px;
+  text-align: right;
+  font-size: 32px;
 }
 
 .reachout-send-container {
-    width: 150px;
+  width: 150px;
 }
 
 textarea:focus {
-    outline: none;
+  outline: none;
 }
 
 .bottom-padding {
-    margin-bottom: 30%;
+  margin-bottom: 30%;
 }
 
 .reachout {
-    text-align: right;
-    display: block;
-    padding-bottom: 30px;
-    width: 100%;
-    min-width: 100%;
+  text-align: right;
+  display: block;
+  padding-bottom: 30px;
+  width: 100%;
+  min-width: 100%;
 }
 
 .arrow,
 .load-spin {
-    display: none;
-    text-decoration: none;
-    height: 32px;
-    width: 32px;
-    color: darkorange;
+  display: none;
+  text-decoration: none;
+  height: 32px;
+  width: 32px;
+  color: darkorange;
 }
 
 .load-spin {
-    display: block;
-    animation: rotation 2s infinite linear;
-    margin-top: 20px;
-    margin-bottom: 20px;
+  display: block;
+  animation: rotation 2s infinite linear;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .load-spin-send {
-    float: right;
+  float: right;
 }
 
 .reachout-send-results {
-    max-width: fit-content;
-    display: block;
-    text-align: left;
+  max-width: fit-content;
+  display: block;
+  text-align: left;
 }
 
 @keyframes rotation {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(359deg);
-    }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
 }

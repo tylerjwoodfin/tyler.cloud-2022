@@ -1,88 +1,101 @@
 <html>
-    <head>
-        <title>Tyler Woodfin</title>
+  <head>
+    <title>Tyler Woodfin</title>
 
-        <!-- basic housekeeping -->
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta charset="UTF-8" />
-        <meta
-            name="description"
-            content="Tyler Woodfin is a software engineer in Austin, Texas."
+    <!-- basic housekeeping -->
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="UTF-8" />
+    <meta
+      name="description"
+      content="Tyler Woodfin is a software engineer in Austin, Texas."
+    />
+    <meta name="keywords" content="tyler, woodfin, consultant, austin" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- jquery, lodash -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.20/lodash.min.js"></script>
+
+    <!-- local css/js -->
+    <link rel="stylesheet" href="/assets/css/core.css" />
+    <script src="/assets/js/core.js"></script>
+
+    <!-- fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200;300;400&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- favicon -->
+    <link href="/assets/img/favicon.ico" rel="shortcut icon" />
+  </head>
+  <body>
+    <div class="div-center-title">
+      <h1 class="header">Hi, I'm Tyler Woodfin.</h1>
+    </div>
+    <div class="div-links-container div-links bottom-padding">
+      <!-- latest -->
+      <button id="button-latest" onclick="toggleButton('latest')">
+        Latest Work<img
+          class="arrow"
+          id="arrow-latest"
+          src="/assets/img/arrow.svg"
         />
-        <meta name="keywords" content="tyler, woodfin, consultant, austin" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      </button>
+      <div id="latest" class="div-links hidden">
+        <img class="load-spin" src="/assets/img/loading.svg" />
+      </div>
 
-        <!-- jquery, lodash -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.20/lodash.min.js"></script>
-
-        <!-- local css/js -->
-        <link rel="stylesheet" href="assets/css/core.css" />
-        <script src="assets/js/core.js"></script>
-
-        <!-- fonts -->
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200;300;400&display=swap"
-            rel="stylesheet"
+      <!-- reach out -->
+      <button id="button-reachout" onclick="toggleButton('reachout')">
+        Reach Out<img
+          id="arrow-reachout"
+          class="arrow"
+          src="/assets/img/arrow.svg"
         />
-
-        <!-- favicon -->
-        <link href="../assets/img/favicon.ico" rel="shortcut icon" />
-    </head>
-    <body>
-        <div class="div-center-title">
-            <h1 class="header">Hi, I'm Tyler Woodfin.</h1>
+      </button>
+      <div id="reachout" class="div-links reachout hidden">
+        <textarea id="textarea-reachout" class="textarea-reachout"></textarea>
+        <div class="reachout reachout-send-container">
+          <button class="button-reachout-send" onclick="handleSend()">
+            Send
+          </button>
+          <span class="reachout-send-results" id="reachout-send-results"></span>
+          <img
+            class="load-spin load-spin-send hidden"
+            src="/assets/img/loading.svg"
+          />
         </div>
-        <div class="div-links-container div-links bottom-padding">
-            <!-- latest -->
-            <button id="button-latest" onclick="toggleButton('latest')">
-                Latest Work<img
-                    class="arrow"
-                    id="arrow-latest"
-                    src="/assets/img/arrow.svg"
-                />
-            </button>
-            <div id="latest" class="div-links hidden">
-                <img class="load-spin" src="/assets/img/loading.svg" />
-            </div>
+      </div>
 
-            <!-- reach out -->
-            <button id="button-reachout" onclick="toggleButton('reachout')">
-                Reach Out<img
-                    id="arrow-reachout"
-                    class="arrow"
-                    src="/assets/img/arrow.svg"
-                />
-            </button>
-            <div id="reachout" class="div-links reachout hidden">
-                <textarea
-                    id="textarea-reachout"
-                    class="textarea-reachout"
-                ></textarea>
-                <div class="reachout reachout-send-container">
-                    <button class="button-reachout-send" onclick="handleSend()">
-                        Send
-                    </button>
-                    <span
-                        class="reachout-send-results"
-                        id="reachout-send-results"
-                    ></span>
-                    <img
-                        class="load-spin load-spin-send hidden"
-                        src="/assets/img/loading.svg"
-                    />
-                </div>
-            </div>
+      <!-- linkedin -->
+      <a
+        id="button-linkedin"
+        href="https://linkedin.com/in/tylerjwoodfin"
+        target="_new"
+        >LinkedIn</a
+      >
 
-            <!-- linkedin -->
-            <a
-                id="button-linkedin"
-                href="https://linkedin.com/in/tylerjwoodfin"
-                target="_new"
-                >LinkedIn</a
-            >
-        </div>
-    </body>
+      <!-- about -->
+      <button id="button-about" onclick="toggleButton('about')">
+        About<img id="arrow-about" class="arrow" src="/assets/img/arrow.svg" />
+      </button>
+      <div id="about" class="about div-links hidden">
+        <p>I'm a full-stack software engineer in Austin, Texas.</p>
+        <img class="face" src="/assets/img/face.jpg" />
+        <p>
+          I love to travel! I've visited all 50 states, 10 countries, and 3
+          continents. I'm always looking for new opportunities to learn and
+          grow.
+        </p>
+        <p>
+          I also have
+          <a href="https://www.tyler.cloud/airbnb" target="_new">an Airbnb</a>
+          if you're looking to visit the Austin area!
+        </p>
+      </div>
+    </div>
+  </body>
 </html>
