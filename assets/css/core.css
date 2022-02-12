@@ -1,14 +1,13 @@
+html {
+  overflow-y: scroll;
+}
+
 body {
   font-family: "Source Sans Pro", sans-serif;
   color: #d8d8d8;
   font-size: 30px;
   background-image: url("/assets/img/tile.png");
   margin: 0;
-  position: absolute;
-  top: 30%;
-  left: 50%;
-  -ms-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
 }
 
 .hidden {
@@ -19,29 +18,33 @@ img {
   max-width: 100%;
 }
 
-.div-center-title,
-.div-links {
-  text-align: left;
-  padding-bottom: 30px;
-  max-width: 400px;
+.div-center-title {
+  width: 50%;
+  margin: auto;
 }
 
 .div-links-container {
   display: flex;
+  flex-direction: column;
+  text-align: left;
+  padding-bottom: 30px;
+  width: 100%;
   margin: auto;
-  position: absolute;
+  margin-left: 25%;
 }
 
 .div-links {
+  text-align: left;
+  padding-bottom: 30px;
   display: flex;
   flex-direction: column;
-  width: min(100%, 400px);
   overflow-x: hidden;
 }
 
 .header {
   font-weight: 300;
-  font-size: 80px;
+  font-size: 7vh;
+  margin-top: 10%;
 }
 
 .face {
@@ -67,7 +70,6 @@ button {
   padding: 0;
   text-align: left;
   width: max-content;
-  transition: 0.4s;
 }
 
 a:hover,

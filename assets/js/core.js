@@ -23,21 +23,25 @@ $(document).ready(function () {
 });
 
 function getLatest() {
-  $("#latest").prepend(
-    `<a href="https://www.github.com/tylerjwoodfin" class="sub" target=_new>GitHub...</a>`
-  );
   $.getJSON("https://api.github.com/users/tylerjwoodfin/repos", {
     format: "json",
   })
     .done(function (data) {
-      $(_.sortBy(data, "pushed_at")).each(function (i, item) {
-        $("#latest").prepend(
+      console.log($(_.sortBy(data, "pushed_at")));
+      $(_.sortBy(data, "pushed_at").reverse()).each(function (i, item) {
+        if (item.name === "tyler.cloud") {
+          return;
+        }
+        $("#latest").append(
           `<a href="${item.html_url}" class="sub" target=_new>${item.name}</a>\n`
         );
         return i < 6;
       });
     })
     .always(function () {
+      $("#latest").append(
+        `<a href="https://www.github.com/tylerjwoodfin" class="sub" target=_new>GitHub...</a>`
+      );
       $("#load-spin-latest").hide();
     });
 }
@@ -66,6 +70,7 @@ function toggleButton(name) {
 
     if (name === "tpn") {
       $(`[class^=sub]`).hide();
+      $(`#more`).hide();
       $(`#button-tpn`).removeClass("hidden");
       $(`#button-tpn`).show();
     }
