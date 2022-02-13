@@ -27,7 +27,6 @@ function getLatest() {
     format: "json",
   })
     .done(function (data) {
-      console.log($(_.sortBy(data, "pushed_at")));
       $(_.sortBy(data, "pushed_at").reverse()).each(function (i, item) {
         if (item.name === "tyler.cloud") {
           return;
@@ -74,6 +73,10 @@ function toggleButton(name) {
       $(`#button-tpn`).removeClass("hidden");
       $(`#button-tpn`).show();
     }
+
+    if (name === "tpn" || name === "about") {
+      $(`#div-links-container`).removeClass("bottom-padding");
+    }
   } else {
     //hide
     $(`textarea`).val("");
@@ -90,6 +93,10 @@ function toggleButton(name) {
       toggleButton("more");
       $(`[class^=sub]`).show();
       $(`#button-tpn`).addClass("hidden");
+    }
+
+    if (name === "tpn" || name === "about") {
+      $(`#div-links-container`).addClass("bottom-padding");
     }
   }
 }

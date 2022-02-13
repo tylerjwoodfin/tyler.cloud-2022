@@ -28,7 +28,7 @@ img {
   flex-direction: column;
   text-align: left;
   padding-bottom: 30px;
-  width: 100%;
+  max-width: 100%;
   margin: auto;
   margin-left: 25%;
 }
@@ -49,7 +49,6 @@ img {
 
 .face {
   display: block;
-  max-height: 45vh;
   margin-left: 10%;
   margin-right: 10%;
   image-orientation: from-image;
@@ -117,6 +116,17 @@ textarea:focus {
   margin-bottom: 30%;
 }
 
+.about {
+  width: 50%;
+  margin: auto;
+}
+
+@media (max-width: 800px) {
+  .about {
+    width: 75%;
+  }
+}
+
 .reachout {
   text-align: right;
   display: block;
@@ -149,6 +159,50 @@ textarea:focus {
   max-width: fit-content;
   display: block;
   text-align: left;
+}
+
+.tpn {
+  max-width: 80%;
+  margin: auto;
+}
+
+.tpn-img {
+  width: 90%;
+  height: 38%;
+}
+
+.tpn-header {
+  width: 100%;
+}
+
+.tpn-cell {
+  padding-left: 10px;
+  padding-right: 10px;
+  width: 33%;
+}
+
+.tpn-cell-header {
+  min-height: 12%;
+}
+
+.tpn-cell-p {
+  min-height: 50%;
+}
+
+.tpn-cell-container {
+  display: flex;
+  overflow-x: visible;
+  flex-direction: row;
+}
+
+@media (max-width: 800px) {
+  .tpn-cell-container {
+    flex-direction: column;
+  }
+
+  .tpn-cell {
+    width: 100%;
+  }
 }
 
 @keyframes rotation {

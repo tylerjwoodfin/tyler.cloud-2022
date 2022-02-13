@@ -38,7 +38,7 @@
     <div class="div-center-title">
       <h1 class="header">Hi, I'm Tyler Woodfin.</h1>
     </div>
-    <div class="div-links-container bottom-padding">
+    <div id="div-links-container" class="div-links-container bottom-padding">
       <!-- latest -->
       <button id="button-latest" onclick="toggleButton('latest')">
         Latest Work<img
@@ -59,20 +59,6 @@
       <button id="button-about" onclick="toggleButton('about')">
         About<img id="arrow-about" class="arrow" src="/assets/img/arrow.svg" />
       </button>
-      <div id="about" class="about div-links hidden">
-        <p>I'm a full-stack software engineer in Austin, Texas.</p>
-        <img class="face" src="/assets/img/face.jpg" />
-        <p>
-          I love to travel! I've visited all 50 states, 10 countries, and 3
-          continents. I'm always looking for new opportunities to learn and
-          grow.
-        </p>
-        <p>
-          I also have
-          <a href="https://www.tyler.cloud/airbnb" target="_new">an Airbnb</a>
-          if you're looking to visit the Austin area!
-        </p>
-      </div>
 
       <!-- linkedin -->
       <a
@@ -133,62 +119,76 @@
           src="/assets/img/arrow.svg"
         />
       </button>
-      <div id="tpn" class="tpn div-links hidden">
-        <div>
-          <h2>Showcasing my childhood "design skills"</h2>
+    </div>
     
+    <!-- content outside of menu -->
+
+    <!-- about -->
+    <div id="about" class="about div-links hidden">
+      <p>I'm a full-stack software engineer in Austin, Texas.</p>
+      <img class="face" src="/assets/img/face.jpg" />
+      <p>
+        I love to travel! I've visited all 50 states, 10 countries, and 3
+        continents. I'm always looking for new opportunities to learn and
+        grow.
+      </p>
+      <p>
+        I also have
+        <a href="https://www.tyler.cloud/airbnb" target="_new">an Airbnb</a>
+        if you're looking to visit the Austin area!
+      </p>
+    </div>
+
+    <!-- tpn -->
+    <div class="tpn" id="tpn">
+      <div class="tpn-header">
+        <h2>Showcasing my childhood "design skills"</h2>
+        
+        <p>
+          I've been developing websites since 6th grade- these are 3 iterations of
+          what I called the "Tyler Pages Network". I fixed a few dead links and
+          removed some orphaned files, but I kept the questionable fonts,
+          excessive exclamation points, and childish sense of humor in pristine
+          condition.
+        </p>
+      </div>
+      
+      <div class="div-links tpn-cell-container">
+        <div class="tpn-cell">
+          <h3 class="tpn-cell-header">Fall 2006</h3>
+          <a href="/tpn/original1.htm" target="_new"
+            ><img class="tpn-img" src="/assets/img/tpn/original1.PNG"
+          /></a>
           <p>
-            I've been developing websites since 6th grade- these are 3 iterations of
-            what I called the "Tyler Pages Network". I fixed a few dead links and
-            removed some orphaned files, but I kept the questionable fonts,
-            excessive exclamation points, and childish sense of humor in pristine
-            condition. Take a look, but be warned- what you're about to see might
-            make you cringe!
+            During an after-school computer club, I learned how to use basic
+            HTML tags, save an HTML file
+            in Notepad, and view it in Internet
+            Explorer (2006's finest web browser).
           </p>
         </div>
-    
-        <div>
-          <div>
-            <div>
-              <h2>My First Attempt</h2>
-              <h3>Fall 2006</h3>
-              <p>
-                During an after-school computer club, I learned how to use basic
-                HTML tags (like setting the font to Comic Sans), save an HTML file
-                in Notepad (the best tool available), and view it in Internet
-                Explorer (2006's finest web browser).
-              </p>
-              <a href="/tpn/original1.htm" target="_new"
-                ><img src="/assets/img/tpn/original1.PNG"
-              /></a>
-            </div>
-    
-            <div>
-              <h2>Running Out of Room</h2>
-              <h3>Spring 2007</h3>
-              <p>
-                I learned that making users scroll your lime green background for
-                too long was bad UX, so I had a simple solution: adding another
-                page!
-              </p>
-              <a href="/tpn/MyNewPageTyler.htm" target="_new"
-                ><img src="/assets/img/tpn/original2.PNG" target="_new"
-              /></a>
-            </div>
-    
-            <div>
-              <h2>Web Design in... Word?</h2>
-              <h3>Summer 2007</h3>
-              <p>
-                Over summer break, I noticed I could save Microsoft Word files as
-                web pages! I could even use tables to organize my content... and use
-                clip art as images!
-              </p>
-              <a href="/tpn/tpnindex.htm" target="_new"
-                ><img src="/assets/img/tpn/original3.PNG" target="_new"
-              /></a>
-            </div>
-          </div>
+
+        <div class="tpn-cell">
+          <h3 class="tpn-cell-header">Spring 2007</h3>
+          <a href="/tpn/MyNewPageTyler.htm" target="_new"
+            ><img class="tpn-img" src="/assets/img/tpn/original2.PNG" target="_new"
+          /></a>
+          <p>
+            I learned that making users scroll your lime green background for
+            too long was bad UX, so I had a simple solution: adding another
+            page!
+          </p>
+        </div>
+
+        <div class="tpn-cell">
+          <h3 class="tpn-cell-header">Summer 2007</h3>
+          <a href="/tpn/tpnindex.htm" target="_new"
+            ><img class="tpn-img" src="/assets/img/tpn/original3.PNG" target="_new"
+          /></a>
+          <p>
+            Over summer break, I noticed I could save Microsoft Word files as
+            web pages! I could even use tables to organize my content... and use
+            clip art as images!
+          </p>
         </div>
     </div>
   </body>
