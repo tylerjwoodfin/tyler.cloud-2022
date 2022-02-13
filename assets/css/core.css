@@ -79,6 +79,15 @@ button {
   width: max-content;
 }
 
+button:disabled {
+  color: #d8d8d8;
+  cursor: default;
+}
+
+button:disabled:hover {
+  text-decoration: none;
+}
+
 a:hover,
 button:hover,
 a:focus-visible,

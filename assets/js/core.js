@@ -104,7 +104,7 @@ function toggleButton(name) {
   }
 }
 
-function handleSend() {
+function handleReachoutSend() {
   $(`.button-reachout-send`).hide();
   $(`.load-spin-send`).show();
 
@@ -127,4 +127,12 @@ function handleSend() {
     $(`.button-reachout-send`).show();
     $(`.load-spin-send`).hide();
   });
+}
+
+function handleReachoutKeyUp() {
+  if ($("#textarea-reachout")[0].value.trim().length > 0) {
+    $(`.button-reachout-send`).removeAttr("disabled");
+  } else {
+    $(`.button-reachout-send`).attr("disabled", "disabled");
+  }
 }
