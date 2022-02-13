@@ -1,0 +1,43 @@
+.tpn {
+  max-width: 80%;
+  margin: auto;
+}
+
+.tpn-img {
+  width: 90%;
+  height: 38%;
+}
+
+.tpn-header {
+  width: 100%;
+}
+
+.tpn-cell {
+  padding-left: 10px;
+  padding-right: 10px;
+  width: 33%;
+}
+
+.tpn-cell-header {
+  min-height: 12%;
+}
+
+.tpn-cell-p {
+  min-height: 50%;
+}
+
+.tpn-cell-container {
+  display: flex;
+  overflow-x: visible;
+  flex-direction: row;
+}
+
+@media (max-width: 800px) {
+  .tpn-cell-container {
+    flex-direction: column;
+  }
+
+  .tpn-cell {
+    width: 100%;
+  }
+}

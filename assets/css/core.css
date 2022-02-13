@@ -33,6 +33,12 @@ img {
   margin-left: 25%;
 }
 
+@media (max-width: 800px) {
+  .div-links-container {
+    margin-left: 10%;
+  }
+}
+
 .div-links {
   text-align: left;
   padding-bottom: 30px;
@@ -55,6 +61,8 @@ img {
   -webkit-box-shadow: -14px 21px 28px -2px rgba(135, 135, 135, 0.34);
   -moz-box-shadow: -14px 21px 28px -2px rgba(135, 135, 135, 0.34);
   box-shadow: -14px 21px 28px -2px rgba(135, 135, 135, 0.34);
+  width: min(400px, 85%);
+  height: auto;
 }
 
 a,
@@ -86,26 +94,9 @@ button:focus-visible,
   padding-left: 32px;
 }
 
-.textarea-reachout {
-  width: 100%;
-  height: 150px;
-  border: 2px solid #d8d8d8;
-  color: #d8d8d8;
-  resize: none;
-  margin-bottom: 10px;
-  font-size: 32px;
-  font-family: "Source Sans Pro", sans-serif;
-  padding: 8px;
-  background-color: transparent;
-}
-
 .button-reachout-send {
   text-align: right;
   font-size: 32px;
-}
-
-.reachout-send-container {
-  width: 150px;
 }
 
 textarea:focus {
@@ -131,8 +122,26 @@ textarea:focus {
   text-align: right;
   display: block;
   padding-bottom: 30px;
+  max-width: min(400px, 75%);
+}
+
+.reachout-send-results {
+  max-width: fit-content;
+  display: block;
+  text-align: left;
+}
+
+.textarea-reachout {
   width: 100%;
-  min-width: 100%;
+  height: 150px;
+  border: 2px solid #d8d8d8;
+  color: #d8d8d8;
+  resize: none;
+  margin-bottom: 10px;
+  font-size: 32px;
+  font-family: "Source Sans Pro", sans-serif;
+  padding: 8px;
+  background-color: transparent;
 }
 
 .arrow,
@@ -153,56 +162,6 @@ textarea:focus {
 
 .load-spin-send {
   float: right;
-}
-
-.reachout-send-results {
-  max-width: fit-content;
-  display: block;
-  text-align: left;
-}
-
-.tpn {
-  max-width: 80%;
-  margin: auto;
-}
-
-.tpn-img {
-  width: 90%;
-  height: 38%;
-}
-
-.tpn-header {
-  width: 100%;
-}
-
-.tpn-cell {
-  padding-left: 10px;
-  padding-right: 10px;
-  width: 33%;
-}
-
-.tpn-cell-header {
-  min-height: 12%;
-}
-
-.tpn-cell-p {
-  min-height: 50%;
-}
-
-.tpn-cell-container {
-  display: flex;
-  overflow-x: visible;
-  flex-direction: row;
-}
-
-@media (max-width: 800px) {
-  .tpn-cell-container {
-    flex-direction: column;
-  }
-
-  .tpn-cell {
-    width: 100%;
-  }
 }
 
 @keyframes rotation {
