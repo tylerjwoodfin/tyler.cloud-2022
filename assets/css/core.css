@@ -18,7 +18,7 @@ img {
   max-width: 100%;
 }
 
-.div-center-title {
+.header-container {
   width: 50%;
   margin: auto;
 }
@@ -50,7 +50,7 @@ img {
 .header {
   font-weight: 300;
   font-size: 7vh;
-  margin-top: 10%;
+  margin-top: 30%;
 }
 
 .face {

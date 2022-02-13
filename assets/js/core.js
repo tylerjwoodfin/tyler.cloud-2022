@@ -13,12 +13,15 @@ $(document).ready(function () {
   $(`#tpn`).removeClass("hidden");
   $(`#tpn`).hide();
 
+  // create symlinks to handle these
   if (window.location.href.indexOf("about") > -1) {
     toggleButton("about");
   } else if (window.location.href.indexOf("tpn") > -1) {
     toggleButton("tpn");
   } else if (window.location.href.indexOf("latest") > -1) {
     toggleButton("latest");
+  } else if (window.location.href.indexOf("reachout") > -1) {
+    toggleButton("reachout");
   }
 });
 
