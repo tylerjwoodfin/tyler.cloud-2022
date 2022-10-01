@@ -41,9 +41,6 @@ function getLatest() {
       });
     })
     .always(function () {
-      $("#latest").append(
-        `<a href="https://www.github.com/tylerjwoodfin" class="sub" target=_new>GitHub...</a>`
-      );
       $("#load-spin-latest").hide();
     });
 }
@@ -61,6 +58,11 @@ function toggleButton(name) {
 
   // show
   if ($(`#${name}`)[0].style.display !== `none`) {
+    // scroll to bottom except on mobile
+    if (window.innerWidth > 799) {
+      window.scrollTo(0, document.body.scrollHeight);
+    }
+
     $(`#button-${name}`)[0].style.textDecoration = `underline`;
     $(`[id^=button]`).not(`#button-${name}`).hide();
     $(`[id^=arrow]`).not(`#arrow-${name}`).hide();
@@ -76,12 +78,8 @@ function toggleButton(name) {
       $(`#button-tpn`).removeClass("hidden");
       $(`#button-tpn`).show();
     }
-
-    if (name === "tpn" || name === "about") {
-      $(`#div-links-container`).removeClass("bottom-padding");
-    }
   } else {
-    //hide
+    // hide
     $(`textarea`).val("");
     $(`#button-${name}`)[0].style.textDecoration = ``;
     $(`[id^=arrow]`).hide();
@@ -96,10 +94,6 @@ function toggleButton(name) {
       toggleButton("more");
       $(`[class^=sub]`).show();
       $(`#button-tpn`).addClass("hidden");
-    }
-
-    if (name === "tpn" || name === "about") {
-      $(`#div-links-container`).addClass("bottom-padding");
     }
   }
 }

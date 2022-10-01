@@ -1,197 +1,149 @@
 <html>
-  <head>
-    <title>Tyler Woodfin</title>
 
-    <!-- basic housekeeping -->
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta charset="UTF-8" />
-    <meta
-      name="description"
-      content="Tyler Woodfin is a software engineer in Austin, Texas."
-    />
-    <meta name="keywords" content="tyler, woodfin, consultant, austin" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="cache-control" content="no-cache" />
-    <meta http-equiv="expires" content="0" />
-    <meta http-equiv="pragma" content="no-cache" />
+<head>
+  <title>Tyler Woodfin</title>
 
-    <!-- jquery, lodash -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.20/lodash.min.js"></script>
+  <!-- basic housekeeping -->
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8" />
+  <meta name="description" content="Tyler Woodfin is a software engineer in Austin, Texas." />
+  <meta name="keywords" content="tyler, woodfin, consultant, austin" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="cache-control" content="no-cache" />
+  <meta http-equiv="expires" content="0" />
+  <meta http-equiv="pragma" content="no-cache" />
 
-    <!-- local css/js -->
-    <link rel="stylesheet" href="/assets/css/core.css" />
-    <link rel="stylesheet" href="/assets/css/tpn.css" />
-    <script src="/assets/js/core.js"></script>
+  <!-- jquery, lodash -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.20/lodash.min.js"></script>
 
-    <!-- fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200;300;400&display=swap"
-      rel="stylesheet"
-    />
+  <!-- local css/js -->
+  <link rel="stylesheet" href="/assets/css/core.css" />
+  <link rel="stylesheet" href="/assets/css/tpn.css" />
+  <script src="/assets/js/core.js"></script>
 
-    <!-- favicon -->
-    <link href="/assets/img/favicon.ico" rel="shortcut icon" />
-  </head>
-  <body>
-    <div class="header-container">
-      <h1 class="header">Hi, I'm Tyler Woodfin.</h1>
-    </div>
-    <div id="div-links-container" class="div-links-container bottom-padding">
-      <!-- latest -->
-      <button id="button-latest" onclick="toggleButton('latest')">
-        Latest Work<img
-          class="arrow"
-          id="arrow-latest"
-          src="/assets/img/arrow.svg"
-        />
-      </button>
-      <div id="latest" class="div-links hidden">
-        <img
-          class="load-spin"
-          id="load-spin-latest"
-          src="/assets/img/loading.svg"
-        />
-      </div>
+  <!-- fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200;300;400&display=swap"
+    rel="stylesheet" />
 
-      <!-- about -->
-      <button id="button-about" onclick="toggleButton('about')">
-        About<img id="arrow-about" class="arrow" src="/assets/img/arrow.svg" />
-      </button>
+  <!-- favicon -->
+  <link href="/assets/img/favicon.ico" rel="shortcut icon" />
+</head>
 
-      <!-- linkedin -->
-      <a
-        id="button-linkedin"
-        href="https://linkedin.com/in/tylerjwoodfin"
-        target="_new"
-        >LinkedIn</a
-      >
-
-      <!-- reach out -->
-      <button id="button-reachout" onclick="toggleButton('reachout')">
-        Reach Out<img
-          id="arrow-reachout"
-          class="arrow"
-          src="/assets/img/arrow.svg"
-        />
-      </button>
-      <div id="reachout" class="reachout div-links hidden">
-        <textarea id="textarea-reachout" onkeyup="handleReachoutKeyUp()" class="textarea-reachout"></textarea>
-        <div>
-          <button class="button-reachout-send" disabled onclick="handleReachoutSend()">
-            Send
-          </button>
-          <span class="reachout-send-results" id="reachout-send-results"></span>
-          <img
-            class="load-spin load-spin-send hidden"
-            src="/assets/img/loading.svg"
-          />
-        </div>
-      </div>
-
-      <!-- more -->
-      <button id="button-more" onclick="toggleButton('more')">
-        More<img id="arrow-more" class="arrow" src="/assets/img/arrow.svg" />
-      </button>
-      <div id="more" class="more div-links hidden">
-        <a href="/games/rundino/" class="sub" target="_new">Run, Dino</a>
-        <a
-          href="https://play.google.com/store/apps/details?id=cloud.tyler.billionslottery"
-          class="sub"
-          target="_new"
-          >Billions Lottery
-        </a>
-        <a
-          href="https://play.google.com/store/apps/details?id=tylerwoodfin.com.fourlittleletters"
-          class="sub"
-          target="_new"
-          >Four Little Letters</a
-        >
-        <button id="button-tpn-sub" onclick="toggleButton('tpn')" class="sub" target="_new">My 2006 Website</a>
-      </div>
-
-      <!-- tpn, hidden by default -->
-      <button id="button-tpn" class="hidden" onclick="toggleButton('tpn')">
-        My 2006 Website<img
-          id="arrow-tpn"
-          class="arrow"
-          src="/assets/img/arrow.svg"
-        />
-      </button>
-    </div>
-    
-    <!-- content outside of menu -->
+<body>
+  <div class="header-container">
+    <h1 class="header">Hi, I'm Tyler Woodfin.</h1>
+  </div>
+  <div id="div-links-container" class="div-links-container">
 
     <!-- about -->
-    <div id="about" class="about div-links hidden">
-      <img class="face" src="/assets/img/face.jpg" />
+    <button id="button-about" onclick="toggleButton('about')">
+      about<img id="arrow-about" class="arrow" src="/assets/img/arrow.svg" />
+    </button>
+
+    <!-- latest -->
+    <button id="button-latest" onclick="toggleButton('latest')">
+      latest stuff<img class="arrow" id="arrow-latest" src="/assets/img/arrow.svg" />
+    </button>
+    <div id="latest" class="div-links hidden">
+      <img class="load-spin" id="load-spin-latest" src="/assets/img/loading.svg" />
+    </div>
+
+    <!-- older work (internally "more") -->
+    <button id="button-more" onclick="toggleButton('more')">
+      older stuff<img id="arrow-more" class="arrow" src="/assets/img/arrow.svg" />
+    </button>
+    <div id="more" class="more div-links hidden">
+      <a href="/games/rundino/" class="sub" target="_new">Run, Dino</a>
+      <a href="https://play.google.com/store/apps/details?id=cloud.tyler.billionslottery" class="sub"
+        target="_new">Billions Lottery
+      </a>
+      <a href="https://play.google.com/store/apps/details?id=tylerwoodfin.com.fourlittleletters" class="sub"
+        target="_new">Four Little Letters</a>
+      <button id="button-tpn-sub" onclick="toggleButton('tpn')" class="sub" target="_new">My 2006 Website</a>
+    </div>
+
+    <!-- tpn, hidden by default -->
+    <button id="button-tpn" class="hidden" onclick="toggleButton('tpn')">
+      My 2006 Website<img id="arrow-tpn" class="arrow" src="/assets/img/arrow.svg" />
+    </button>
+
+    <!-- github -->
+    <a id="button-github" href="https://www.github.com/tylerjwoodfin" target="_new">github</a>
+
+    <!-- linkedin -->
+    <a id="button-linkedin" href="https://linkedin.com/in/tylerjwoodfin" target="_new">linkedin</a>
+
+    <!-- reach out -->
+    <button id="button-reachout" onclick="toggleButton('reachout')">
+      reach out<img id="arrow-reachout" class="arrow" src="/assets/img/arrow.svg" />
+    </button>
+    <div id="reachout" class="reachout div-links hidden">
+      <textarea id="textarea-reachout" onkeyup="handleReachoutKeyUp()" class="textarea-reachout"></textarea>
+      <div>
+        <button class="button-reachout-send" disabled onclick="handleReachoutSend()">
+          Send
+        </button>
+        <span class="reachout-send-results" id="reachout-send-results"></span>
+        <img class="load-spin load-spin-send hidden" src="/assets/img/loading.svg" />
+      </div>
+    </div>
+  </div>
+
+  <!-- content outside of menu -->
+
+  <!-- about -->
+  <div id="about" class="about div-links hidden">
+    <div class="about-col-30">
+      <img id="about-img" class="about-img" src="/assets/img/face.jpg" />
+    </div>
+    <div id="about-text" class="about-col-70">
       <h3>I'm a full-stack software engineer in Austin, Texas.</h3>
       <p>
         I love to travel! I've visited all 50 states, 10 countries, and 3
         continents. I'm always looking for new opportunities to learn and
         grow.
       </p>
-      <p>I'm a huge music fan- check me out on <a href="https://open.spotify.com/user/mouthofrandom?si=42e675ebeaba4ae3" target="_new">Spotify</a>!</p>
+      <p>I'm a huge music fan- check me out on <a href="https://open.spotify.com/user/mouthofrandom?si=42e675ebeaba4ae3"
+          target="_new">Spotify</a>!
+      </p>
+    </div>
+  </div>
+
+  <!-- tpn -->
+  <div class="tpn" id="tpn">
+    <div class="tpn-header">
+      <h2>Showcasing my childhood "design skills"</h2>
+
       <p>
-        I also have
-        <a href="https://www.tyler.cloud/airbnb" target="_new">an Airbnb</a>
-        if you're looking to visit the Austin area!
+        I've been developing websites since 6th grade- these are 3 iterations of
+        what I called the "Tyler Pages Network". I fixed a few dead links and
+        removed some orphaned files, but I kept the questionable fonts,
+        excessive exclamation points, and childish sense of humor in pristine
+        condition.
       </p>
     </div>
 
-    <!-- tpn -->
-    <div class="tpn" id="tpn">
-      <div class="tpn-header">
-        <h2>Showcasing my childhood "design skills"</h2>
-        
-        <p>
-          I've been developing websites since 6th grade- these are 3 iterations of
-          what I called the "Tyler Pages Network". I fixed a few dead links and
-          removed some orphaned files, but I kept the questionable fonts,
-          excessive exclamation points, and childish sense of humor in pristine
-          condition.
-        </p>
+    <div class="div-links tpn-cell-container">
+      <div class="tpn-cell">
+        <h3 class="tpn-cell-header">Fall 2006</h3>
+        <a href="/tpn/original1.htm" target="_new"><img class="tpn-img" src="/assets/img/tpn/original1.PNG" /></a>
       </div>
-      
-      <div class="div-links tpn-cell-container">
-        <div class="tpn-cell">
-          <h3 class="tpn-cell-header">Fall 2006</h3>
-          <a href="/tpn/original1.htm" target="_new"
-            ><img class="tpn-img" src="/assets/img/tpn/original1.PNG"
-          /></a>
-          <p>
-            During an after-school computer club, I learned how to use basic
-            HTML tags, save an HTML file
-            in Notepad, and view it in Internet
-            Explorer (2006's finest web browser).
-          </p>
-        </div>
 
-        <div class="tpn-cell">
-          <h3 class="tpn-cell-header">Spring 2007</h3>
-          <a href="/tpn/MyNewPageTyler.htm" target="_new"
-            ><img class="tpn-img" src="/assets/img/tpn/original2.PNG" target="_new"
-          /></a>
-          <p>
-            I learned that making users scroll your lime green background for
-            too long was bad UX, so I had a simple solution: adding another
-            page!
-          </p>
-        </div>
+      <div class="tpn-cell">
+        <h3 class="tpn-cell-header">Spring 2007</h3>
+        <a href="/tpn/MyNewPageTyler.htm" target="_new"><img class="tpn-img" src="/assets/img/tpn/original2.PNG"
+            target="_new" /></a>
+      </div>
 
-        <div class="tpn-cell">
-          <h3 class="tpn-cell-header">Summer 2007</h3>
-          <a href="/tpn/tpnindex.htm" target="_new"
-            ><img class="tpn-img" src="/assets/img/tpn/original3.PNG" target="_new"
-          /></a>
-          <p>
-            Over summer break, I noticed I could save Microsoft Word files as
-            web pages! I could even use tables to organize my content... and use
-            clip art as images!
-          </p>
-        </div>
+      <div class="tpn-cell">
+        <h3 class="tpn-cell-header">Summer 2007</h3>
+        <a href="/tpn/tpnindex.htm" target="_new"><img class="tpn-img" src="/assets/img/tpn/original3.PNG"
+            target="_new" /></a>
+      </div>
     </div>
-  </body>
+</body>
+
 </html>
