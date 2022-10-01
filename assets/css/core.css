@@ -110,7 +110,8 @@ textarea:focus {
 }
 
 .about-img {
-  display: block;
+  display: flex;
+  border-radius: 12px;
   image-orientation: from-image;
   -webkit-box-shadow: -14px 21px 28px -2px rgba(135, 135, 135, 0.34);
   -moz-box-shadow: -14px 21px 28px -2px rgba(135, 135, 135, 0.34);
